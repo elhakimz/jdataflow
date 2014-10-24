@@ -14,16 +14,16 @@ Requirements
 Screenshots
 -----------
 Open the diagram
-https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen1.png
+(https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen1.png)
 
 Editing diagram
-https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen2.png
+(https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen2.png)
 
 Choose components
-https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen3.png
+(https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen3.png)
 
 Parameter IN editor
-https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen4.png
+(https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen4.png)
 
 History
 --------
