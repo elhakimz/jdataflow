@@ -8,7 +8,7 @@ Requirements
 ------------
 - Servlet container (Tomcat or Jetty)
 - Recent HTML browser
-- Libraries: FBP Library, Meemoo Dataflow codes, JAX-RS, Bootstrap 3.0 and extensions, ACE Editor (JS), JQuery UI and extensions. 
+- Libraries: FBP Library, Meemoo Dataflow codes, JAX-RS, JDBC (For db development), Bootstrap 3.0 and extensions, ACE Editor (JS), JQuery UI and extensions. 
 
 
 History
