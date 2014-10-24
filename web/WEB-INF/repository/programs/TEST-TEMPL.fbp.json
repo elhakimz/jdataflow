@@ -1,0 +1,171 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "SYS-CONN",
+            "type": "db.SqlSysConnection",
+            "javaType": "org.javafbp.runtime.components.db.SqlSysConnection",
+            "description": "",
+            "x": 389.2640349540212,
+            "y": 94.32333316398247,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 4,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "CLOSE-CONN",
+            "type": "db.SqlClose",
+            "javaType": "org.javafbp.runtime.components.db.SqlClose",
+            "description": "",
+            "x": 952.8333333333334,
+            "y": 212.5,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 2,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "QUERY",
+            "type": "db.SqlQuery",
+            "javaType": "org.javafbp.runtime.components.db.SqlQuery",
+            "description": "",
+            "x": 673.3333333333333,
+            "y": 88.5,
+            "state": {
+                "QUERY": "SELECT * FROM APP_TABLE"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 7,
+            "color": "hsl( 60, 68%, 70%)",
+            "label": "GET-ITEM",
+            "type": "json.GetJsonByIndex",
+            "javaType": "org.javafbp.runtime.components.json.GetJsonByIndex",
+            "description": "",
+            "x": 947.5,
+            "y": 90.66666666666669,
+            "state": {
+                "INDEX": 1
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 3,
+            "color": "",
+            "label": "PROCESS-TEMPLATE",
+            "type": "ftl.TemplateProcess",
+            "javaType": "org.javafbp.runtime.components.ftl.TemplateProcess",
+            "description": "",
+            "x": 1233.366010076852,
+            "y": 81.87213088037792,
+            "state": {
+                "FILE": "/Users/abilhakim/Documents/PROJECTS/dataflow/web/WEB-INF/template/jsp_servlet/shell_view.jsp.ftl"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 5,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "PRINT-CONSOLE",
+            "type": "core.WriteToConsole",
+            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+            "description": "",
+            "x": 1508.6757264881135,
+            "y": 91.41848528209303,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 6,
+            "color": "",
+            "label": "CREATE-FILE",
+            "type": "io.CreateFile",
+            "javaType": "org.javafbp.runtime.components.io.CreateFile",
+            "description": "",
+            "x": 1789.4129193279587,
+            "y": 86.41848528209303,
+            "state": {
+                "DESTINATION": "/Users/abilhakim/Documents/PROJECTS/dataflow/web/WEB-INF/test.txt"
+            },
+            "w": 200,
+            "h": 150
+        }
+    ],
+    "edges": [
+        {
+            "source": {
+                "node": 5,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 6,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 1,
+                "port": "CONNS"
+            },
+            "target": {
+                "node": 2,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 2,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 7,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 7,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 3,
+                "port": "MODEL"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 3,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 5,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 2,
+                "port": "CONN"
+            },
+            "target": {
+                "node": 4,
+                "port": "CONN"
+            },
+            "route": 5
+        }
+    ]
+}

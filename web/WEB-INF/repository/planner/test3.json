@@ -1,0 +1,12 @@
+{ "class": "go.GraphLinksModel",
+  "nodeDataArray": [ 
+{"key":2, "text":"User Interface", "isGroup":true, "category":"OfLayer"},
+{"key":5, "text":"Group C", "isGroup":true, "category":"OfPackage", "group":2},
+{"key":6, "text":"Group D", "isGroup":true, "category":"OfPackage", "group":2},
+{"key":7, "text":"Group E", "isGroup":true, "category":"OfPackage", "group":6},
+{"text":"first C", "group":5, "key":-12},
+{"text":"second C", "group":5, "key":-13},
+{"text":"first D", "group":6, "key":-14},
+{"text":"first E", "group":7, "key":-15}
+ ],
+  "linkDataArray": [  ]}

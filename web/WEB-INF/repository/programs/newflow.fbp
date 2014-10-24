@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": 1,
+      "color": "hsl(219, 16%, 76%)",
+      "label": "StartsWith1",
+      "type": "core.StartsWith",
+      "javaType": "com.jpmorrsn.fbp.components.StartsWith",
+      "description": "",
+      "x": 397,
+      "y": 135,
+      "state": {},
+      "w": 200,
+      "h": 150
+    },
+    {
+      "id": 2,
+      "color": "hsl(219, 16%, 76%)",
+      "label": "WriteToConsole2",
+      "type": "core.WriteToConsole",
+      "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+      "description": "",
+      "x": 685,
+      "y": 135,
+      "state": {},
+      "w": 200,
+      "h": 75
+    }
+  ],
+  "edges": [
+    {
+      "source": {
+        "node": 1,
+        "port": "ACC"
+      },
+      "target": {
+        "node": 2,
+        "port": "IN"
+      },
+      "route": 4
+    }
+  ]
+}

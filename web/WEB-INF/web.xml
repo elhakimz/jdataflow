@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <!-- Register resources and providers under com.vogella.jersey.first package. -->
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>org.hakim.zen</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FbpComponentServlet</servlet-name>
+        <servlet-class>org.hakim.fbp.servlet.FbpComponentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FbpRunnerServlet</servlet-name>
+        <servlet-class>org.hakim.fbp.servlet.FbpRunnerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FbpRepoServlet</servlet-name>
+        <servlet-class>org.hakim.fbp.servlet.FbpRepoServlet</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>FbpComponentServlet</servlet-name>
+        <url-pattern>/component</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>FbpRunnerServlet</servlet-name>
+        <url-pattern>/runner</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>FbpRepoServlet</servlet-name>
+        <url-pattern>/repo</url-pattern>
+    </servlet-mapping>
+
+
+</web-app>

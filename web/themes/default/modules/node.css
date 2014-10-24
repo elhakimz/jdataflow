@@ -1,0 +1,115 @@
+.dataflow-node {
+  font-size: 12px;
+  position: absolute;
+  display: inline-block;
+  width: 175px;
+  border: 1px #aaa solid;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
+  z-index: 0;
+  border: 1px solid hsla(0, 0%, 0%, .8);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: hsla(220, 11%, 97%, 0.95);
+
+
+
+  box-shadow: inset 0 1px 1px white, 0 2px 3px hsla(0, 0%, 0%, 0.7);
+
+}
+  
+  .dataflow-node .outer {    
+    position: absolute;
+    top:0; right:0; bottom:0; left:0;
+    border-radius: 3px;
+    z-index: -1;
+  }
+  .dataflow-node.ui-selected {
+      box-shadow: 0 0 2px 2px hsla(180, 100%, 60%, .8),        0 0 8px 4px hsla(230, 100%, 15%, 0.8);
+}
+    .dataflow-node.ui-selected .outer {
+      border: 4px hsla(210, 100%, 60%, 0.66) solid;
+      top: -5px; 
+      right: -5px; 
+      bottom: -5px; 
+      left: -5px;
+    }
+  .dataflow-node.helper {
+    width: 100px;
+    height: 75px;
+/*    font-size: 12px;
+    font-weight: normal;
+    font-family: "proxima-nova-bold";
+*/    border-style: dotted;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  .dataflow-node-title {
+    cursor: move;
+    font-size: 12px;
+    font-weight: normal;
+    font-family: "proxima-nova-bold";
+    margin: 0;
+    padding: 6px 10px 1px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow:none;
+  }
+    
+  .dataflow-node .controls {
+  }
+    .dataflow-node .controls .delete {
+      margin-right: 10px;
+    }
+
+.dataflow-node-inspect {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+  
+
+.dataflow-node-inner {
+  clear: both;
+  color: hsl(0,0%,66%);
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.dataflow-nodes-helpers {
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* accelR8 */
+  transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+}
+
+/* Fade */
+
+.dataflow-node.fade {
+ background-color: hsla(220, 11%, 77%, 0.85);
+ text-shadow: 0 1px 0 hsla(220, 11%, 100%, 0.3);
+ opacity: 0.45;
+}
+
+.dataflow-node.fade .dataflow-node-title {
+  color: hsl(0, 0%, 0%);
+  opacity: 0.45;
+}
+
+.dataflow-node.fade .dataflow-node-inspect:before {
+  text-shadow: none
+opacity: 0.45;
+}
+  
+.dataflow-node.fade .dataflow-node-inner {
+  color: hsl(0, 0%, 55%);
+    opacity: 0.45;
+}
+

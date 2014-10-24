@@ -1,0 +1,229 @@
+{
+    "nodes": [
+        {
+            "id": 3,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "SqlSysConnection3",
+            "type": "db.SqlSysConnection",
+            "javaType": "org.javafbp.runtime.components.db.SqlSysConnection",
+            "description": "",
+            "x": 298,
+            "y": 227,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 1,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "SqlQuery1",
+            "type": "db.SqlQuery",
+            "javaType": "org.javafbp.runtime.components.db.SqlQuery",
+            "description": "",
+            "x": 538,
+            "y": 227,
+            "state": {
+                "QUERY": "show tables"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 2,
+            "color": "hsl(210, 68%, 70%)",
+            "label": "SEND-EACH-ITEM",
+            "type": "base.SendEach",
+            "javaType": "org.javafbp.runtime.components.base.SendEach",
+            "description": "",
+            "x": 786.5,
+            "y": 225,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 4,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "CLOSE-CONN",
+            "type": "db.SqlClose",
+            "javaType": "org.javafbp.runtime.components.db.SqlClose",
+            "description": "",
+            "x": 788,
+            "y": 332.5,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 6,
+            "color": "hsl( 60, 68%, 70%)",
+            "label": "GET-TABLE-NAME",
+            "type": "json.GetJsonByKey",
+            "javaType": "org.javafbp.runtime.components.json.GetJsonByKey",
+            "description": "",
+            "x": 1034.3333333333333,
+            "y": 213.5,
+            "state": {
+                "KEY": "TABLE_NAME"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 9,
+            "color": "",
+            "label": "SplitStream9",
+            "type": "flow.SplitStream",
+            "javaType": "org.javafbp.runtime.components.flow.SplitStream",
+            "description": "",
+            "x": 1246.6666666666665,
+            "y": 192.5,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 5,
+            "color": "hsl(210, 68%, 70%)",
+            "label": "StringAffix5",
+            "type": "base.StringAffix",
+            "javaType": "org.javafbp.runtime.components.base.StringAffix",
+            "description": "",
+            "x": 1530.1666666666667,
+            "y": 242.5,
+            "state": {
+                "PRE": "/Users/abilhakim/Documents/PROJECTS/dataflow/web/WEB-INF/generate/",
+                "POST": ".txt"
+            },
+            "w": 200,
+            "h": 225
+        },
+        {
+            "id": 8,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "WriteFile8",
+            "type": "core.WriteFile",
+            "javaType": "com.jpmorrsn.fbp.components.WriteFile",
+            "description": "",
+            "x": 1817.3333333333333,
+            "y": 97,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 7,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "Discard7",
+            "type": "core.Discard",
+            "javaType": "com.jpmorrsn.fbp.components.Discard",
+            "description": "",
+            "x": 2097.833333333333,
+            "y": 101,
+            "state": {},
+            "w": 200,
+            "h": 75
+        }
+    ],
+    "edges": [
+        {
+            "source": {
+                "node": 3,
+                "port": "CONNS"
+            },
+            "target": {
+                "node": 1,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 1,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 2,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 1,
+                "port": "CONN"
+            },
+            "target": {
+                "node": 4,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 2,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 6,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 6,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 9,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 9,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 8,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 8,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 7,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 9,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 5,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 5,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 8,
+                "port": "DESTINATION"
+            },
+            "route": 4
+        }
+    ]
+}

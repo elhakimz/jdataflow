@@ -1,0 +1,1 @@
+Application planning functionalities

@@ -1,0 +1,752 @@
+{
+    "nodes": [
+        {
+            "id": 6,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "SYSTEM-JDBC",
+            "type": "db.JdbcSysConnection",
+            "javaType": "org.javafbp.runtime.components.db.JdbcSysConnection",
+            "description": "",
+            "x": -556.3333333333331,
+            "y": 176.5,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 8,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "JdbcQueryJson8",
+            "type": "db.JdbcQueryJson",
+            "javaType": "org.javafbp.runtime.components.db.JdbcQueryJson",
+            "description": "",
+            "x": -289.9999999999998,
+            "y": 179,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 4,
+            "color": "",
+            "label": "SPLIT-DATA",
+            "type": "flow.SplitStream",
+            "javaType": "org.javafbp.runtime.components.flow.SplitStream",
+            "description": "",
+            "x": 0.8333333333333712,
+            "y": 192.16666666666666,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 9,
+            "color": "hsl( 60, 68%, 70%)",
+            "label": "GET-APP-NAME",
+            "type": "json.GetJsonByKey",
+            "javaType": "org.javafbp.runtime.components.json.GetJsonByKey",
+            "description": "",
+            "x": 238,
+            "y": 189,
+            "state": {
+                "KEY": "app"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 18,
+            "color": "hsl( 60, 68%, 70%)",
+            "label": "SERVICE-MODEL-NAME",
+            "type": "json.GetJsonByKey",
+            "javaType": "org.javafbp.runtime.components.json.GetJsonByKey",
+            "description": "",
+            "x": 250.00000000000068,
+            "y": 440.33333333333337,
+            "state": {
+                "KEY": "service"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 11,
+            "color": "hsl( 60, 68%, 70%)",
+            "label": "MODEL-MODEL-NAME",
+            "type": "json.GetJsonByKey",
+            "javaType": "org.javafbp.runtime.components.json.GetJsonByKey",
+            "description": "",
+            "x": 253.5,
+            "y": 729,
+            "state": {
+                "KEY": "model"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 19,
+            "color": "hsl( 60, 68%, 70%)",
+            "label": "GetJsonByKey19",
+            "type": "json.GetJsonByKey",
+            "javaType": "org.javafbp.runtime.components.json.GetJsonByKey",
+            "description": "",
+            "x": 256.5000000000007,
+            "y": 562.3333333333334,
+            "state": {
+                "KEY": "view"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 10,
+            "color": "hsl(270, 68%, 70%)",
+            "label": "GetAppDescription10",
+            "type": "zen.GetAppDescription",
+            "javaType": "org.javafbp.runtime.components.zen.GetAppDescription",
+            "description": "",
+            "x": 439,
+            "y": 332,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 12,
+            "color": "hsl(270, 68%, 70%)",
+            "label": "SERVICE-MODEL",
+            "type": "zen.GetModelDescription",
+            "javaType": "org.javafbp.runtime.components.zen.GetModelDescription",
+            "description": "",
+            "x": 708,
+            "y": 358,
+            "state": {
+                "TYPE": "SERVICE"
+            },
+            "w": 200,
+            "h": 300
+        },
+        {
+            "id": 17,
+            "color": "hsl(270, 68%, 70%)",
+            "label": "MODEL-MODEL",
+            "type": "zen.GetModelDescription",
+            "javaType": "org.javafbp.runtime.components.zen.GetModelDescription",
+            "description": "",
+            "x": 708.3333333333339,
+            "y": 721.1666666666667,
+            "state": {
+                "TYPE": "MODEL"
+            },
+            "w": 200,
+            "h": 300
+        },
+        {
+            "id": 16,
+            "color": "hsl(270, 68%, 70%)",
+            "label": "VIEW-MODEL",
+            "type": "zen.GetModelDescription",
+            "javaType": "org.javafbp.runtime.components.zen.GetModelDescription",
+            "description": "",
+            "x": 715.8333333333339,
+            "y": 549.6666666666667,
+            "state": {
+                "TYPE": "VIEW"
+            },
+            "w": 200,
+            "h": 300
+        },
+        {
+            "id": 20,
+            "color": "hsl(270, 68%, 70%)",
+            "label": "GET-SVC-TEMPLS",
+            "type": "zen.GetTempFileName",
+            "javaType": "org.javafbp.runtime.components.zen.GetTempFileName",
+            "description": "",
+            "x": 986,
+            "y": 374,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 7,
+            "color": "hsl(270, 68%, 70%)",
+            "label": "GET-VEW-TEMPLS",
+            "type": "zen.GetTempFileName",
+            "javaType": "org.javafbp.runtime.components.zen.GetTempFileName",
+            "description": "",
+            "x": 989.8333333333333,
+            "y": 553.8333333333334,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 21,
+            "color": "hsl(270, 68%, 70%)",
+            "label": "GET-MODEL-TEMPLS",
+            "type": "zen.GetTempFileName",
+            "javaType": "org.javafbp.runtime.components.zen.GetTempFileName",
+            "description": "",
+            "x": 998,
+            "y": 725.6666666666667,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 5,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "CLOSE-JDBC",
+            "type": "db.JdbcCloseConn",
+            "javaType": "org.javafbp.runtime.components.db.JdbcCloseConn",
+            "description": "",
+            "x": 998,
+            "y": 871,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 1,
+            "color": "",
+            "label": "SERVICE-TEMPLATE-FILE",
+            "type": "ftl.FtlGetTemplate",
+            "javaType": "org.javafbp.runtime.components.ftl.FtlGetTemplate",
+            "description": "",
+            "x": 1226,
+            "y": 289.5,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 14,
+            "color": "",
+            "label": "VIEW-TEMPLATE-FILE",
+            "type": "ftl.FtlGetTemplate",
+            "javaType": "org.javafbp.runtime.components.ftl.FtlGetTemplate",
+            "description": "",
+            "x": 1229.8333333333333,
+            "y": 535.8333333333334,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 22,
+            "color": "",
+            "label": "MODEL-TEMPL-FILE",
+            "type": "ftl.FtlGetTemplate",
+            "javaType": "org.javafbp.runtime.components.ftl.FtlGetTemplate",
+            "description": "",
+            "x": 1241.8333333333335,
+            "y": 733.1666666666667,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 15,
+            "color": "",
+            "label": "PROCESS-VIEW",
+            "type": "ftl.FtlProcess",
+            "javaType": "org.javafbp.runtime.components.ftl.FtlProcess",
+            "description": "",
+            "x": 1465.8333333333333,
+            "y": 525.8333333333334,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 2,
+            "color": "",
+            "label": "PROCESS-SVC-TEMPL",
+            "type": "ftl.FtlProcess",
+            "javaType": "org.javafbp.runtime.components.ftl.FtlProcess",
+            "description": "",
+            "x": 1474,
+            "y": 291.5,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 23,
+            "color": "",
+            "label": "PROCESS-MODEL",
+            "type": "ftl.FtlProcess",
+            "javaType": "org.javafbp.runtime.components.ftl.FtlProcess",
+            "description": "",
+            "x": 1482,
+            "y": 751.6666666666667,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 24,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "WRITE-PROCESS-FILE",
+            "type": "core.EnhancedWriteFile",
+            "javaType": "com.jpmorrsn.fbp.components.EnhancedWriteFile",
+            "description": "",
+            "x": 1717.8333333333333,
+            "y": 527.1666666666667,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 25,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "WRITE-VIEW-FILE",
+            "type": "core.EnhancedWriteFile",
+            "javaType": "com.jpmorrsn.fbp.components.EnhancedWriteFile",
+            "description": "",
+            "x": 1723.8333333333333,
+            "y": 720.1666666666667,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 3,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "CREATE-SVC",
+            "type": "core.WriteFile",
+            "javaType": "com.jpmorrsn.fbp.components.WriteFile",
+            "description": "",
+            "x": 1724,
+            "y": 287.5,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 13,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "OUTPUT",
+            "type": "core.WriteOutputFile",
+            "javaType": "com.jpmorrsn.fbp.components.WriteOutputFile",
+            "description": "",
+            "x": 1984.666666666667,
+            "y": 287.66666666666663,
+            "state": {},
+            "w": 200,
+            "h": 75
+        }
+    ],
+    "edges": [
+        {
+            "source": {
+                "node": 1,
+                "port": "TEMPL"
+            },
+            "target": {
+                "node": 2,
+                "port": "TEMPL"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 6,
+                "port": "CONNS"
+            },
+            "target": {
+                "node": 8,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 3,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 13,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 2,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 3,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 10,
+                "port": "CONN"
+            },
+            "target": {
+                "node": 12,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 10,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 12,
+                "port": "APPDESC"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 9,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 10,
+                "port": "NAME"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 8,
+                "port": "CONN"
+            },
+            "target": {
+                "node": 10,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 12,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 2,
+                "port": "MODEL"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 10,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 16,
+                "port": "APPDESC"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 10,
+                "port": "CONN"
+            },
+            "target": {
+                "node": 16,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 10,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 17,
+                "port": "APPDESC"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 18,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 12,
+                "port": "NAME"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 11,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 17,
+                "port": "NAME"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 19,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 16,
+                "port": "NAME"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 17,
+                "port": "CONN"
+            },
+            "target": {
+                "node": 5,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 10,
+                "port": "CONN"
+            },
+            "target": {
+                "node": 17,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 12,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 20,
+                "port": "MODEL"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 20,
+                "port": "TEMPL"
+            },
+            "target": {
+                "node": 1,
+                "port": "FILE"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 20,
+                "port": "FILE"
+            },
+            "target": {
+                "node": 3,
+                "port": "DESTINATION"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 16,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 7,
+                "port": "MODEL"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 7,
+                "port": "TEMPL"
+            },
+            "target": {
+                "node": 14,
+                "port": "FILE"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 14,
+                "port": "TEMPL"
+            },
+            "target": {
+                "node": 15,
+                "port": "TEMPL"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 16,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 15,
+                "port": "MODEL"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 17,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 21,
+                "port": "MODEL"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 21,
+                "port": "TEMPL"
+            },
+            "target": {
+                "node": 22,
+                "port": "FILE"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 22,
+                "port": "TEMPL"
+            },
+            "target": {
+                "node": 23,
+                "port": "TEMPL"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 17,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 23,
+                "port": "MODEL"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 15,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 24,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 23,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 25,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 7,
+                "port": "FILE"
+            },
+            "target": {
+                "node": 24,
+                "port": "DESTINATION"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 21,
+                "port": "FILE"
+            },
+            "target": {
+                "node": 25,
+                "port": "DESTINATION"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 8,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 4,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 4,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 9,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 4,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 18,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 4,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 19,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 4,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 11,
+                "port": "IN"
+            },
+            "route": 0
+        }
+    ]
+}

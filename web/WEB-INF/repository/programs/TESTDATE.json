@@ -1,0 +1,69 @@
+{
+  "nodes": [
+    {
+      "id": 3,
+      "color": "hsl(219, 16%, 76%)",
+      "label": "WriteToConsole3",
+      "type": "core.WriteToConsole",
+      "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+      "description": "",
+      "x": 953,
+      "y": 157,
+      "state": {},
+      "w": 200,
+      "h": 75
+    },
+    {
+      "id": 1,
+      "color": "hsl(210, 68%, 70%)",
+      "label": "CurrentDate1",
+      "type": "base.CurrentDate",
+      "javaType": "org.javafbp.runtime.components.base.CurrentDate",
+      "description": "",
+      "x": 374,
+      "y": 168,
+      "state": {},
+      "w": 200,
+      "h": 75
+    },
+    {
+      "id": 2,
+      "color": "hsl(210, 68%, 70%)",
+      "label": "FormatDate2",
+      "type": "base.FormatDate",
+      "javaType": "org.javafbp.runtime.components.base.FormatDate",
+      "description": "",
+      "x": 672,
+      "y": 157,
+      "state": {
+        "FMT": "dd-MMM-yyyy"
+      },
+      "w": 200,
+      "h": 150
+    }
+  ],
+  "edges": [
+    {
+      "source": {
+        "node": 1,
+        "port": "OUT"
+      },
+      "target": {
+        "node": 2,
+        "port": "IN"
+      },
+      "route": 3
+    },
+    {
+      "source": {
+        "node": 2,
+        "port": "OUT"
+      },
+      "target": {
+        "node": 3,
+        "port": "IN"
+      },
+      "route": 4
+    }
+  ]
+}

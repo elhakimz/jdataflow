@@ -1,0 +1,22 @@
+.dataflow-edge path {
+  fill: none;
+  stroke-linejoin: bevel;  
+}
+.dataflow-edge-wire {
+  stroke: #CCC;
+  stroke-width: 8px;
+}
+.dataflow-edge-shadow {
+  stroke: #AAA;
+  stroke-width: 10px;
+}
+.dataflow-edge.highlight .dataflow-edge-wire {
+  stroke: #AAA;
+}
+.dataflow-edge.highlight .dataflow-edge-shadow {
+  stroke: #666;
+}
+.dataflow-edge.fade .dataflow-edge-wire,
+.dataflow-edge.fade .dataflow-edge-shadow {
+  stroke: #EEE;
+}
