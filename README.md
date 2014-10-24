@@ -11,6 +11,19 @@ Requirements
 - Recent HTML browser
 - Libraries: FBP Library, Meemoo Dataflow codes, JAX-RS, JDBC (For db development), Bootstrap 3.0 and extensions, ACE Editor (JS), JQuery UI and extensions. 
 
+Screenshots
+-----------
+Open the diagram
+https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen1.png
+
+Editing diagram
+https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen2.png
+
+Choose components
+https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen3.png
+
+Parameter IN editor
+https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen4.png
 
 History
 --------
