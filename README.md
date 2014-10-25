@@ -13,13 +13,24 @@ Requirements
 
 Screenshots
 -----------
+Open the diagram
 ![Open the diagram](https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen1.png "")
 
+Editing diagram
 ![Editing diagram](https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen2.png "")
 
+Choose components
 ![Choose components](https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen3.png "")
 
+Parameter IN editor
 ![Parameter IN editor](https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen4.png "")
+
+Initial value entry before run
+![Initial value entry before run](https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen5.png "")
+
+Runtime log result
+![Runtime log result](https://raw.githubusercontent.com/elhakimz/jdataflow/master/screenshots/screen6.png "")
+
 
 History
 --------
