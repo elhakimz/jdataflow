@@ -52,5 +52,6 @@ Credits:
 
 TODO
 ----
-Needs improvement in server side (java + groovy) and client side (javascript)  codings. too hurry to see this become functional :P
+- Needs improvement in server side (java + groovy) and client side (javascript)  codings. too hurry to see this become functional :P
+- Port this to Vert.X
 
