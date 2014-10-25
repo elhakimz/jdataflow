@@ -10,6 +10,7 @@ please visit FBP Forum (http://groups.google.com/group/flow-based-programming)
 
 Requirements
 ------------
+- Language: Java and Groovy.
 - Servlet container (Tomcat or Jetty)
 - Recent HTML browser
 - Libraries: FBP Library, Meemoo Dataflow codes, JAX-RS, JDBC (For db development), Bootstrap 3.0 and extensions, ACE Editor (JS), JQuery UI and extensions. 
