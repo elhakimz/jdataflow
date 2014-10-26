@@ -19,7 +19,7 @@ Requirements
 Development
 ------------
 - You can use Eclipse, IntelliJ or Netbeans. make sure the /web folder is marked as your web app root.
-- Please changes the values in src/Application.properties to your own directory especially "app.location" and database properties.
+- Please change the values in src/Application.properties to your own directory especially "app.location" and database properties.
 
 Screenshots
 -----------
