@@ -6,8 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.*;
 import java.sql.Connection;
+import java.sql.*;
 
 /**
  * Purpose:
@@ -17,13 +17,16 @@ import java.sql.Connection;
  */
 @ComponentDescription("Query database, CONN is connection, QUERY is query string, OUT is output in JSON format")
 @InPorts({@InPort(value = "CONN", type = Connection.class), @InPort(value = "QUERY", description = "SQL select query")})
-@OutPorts({@OutPort(value = "OUT", description = "Query result in JSON string"),@OutPort(value = "CONN",type = Connection.class, optional = true)})
+@OutPorts({@OutPort(value = "OUT", description = "Query result in JSON string")
+        , @OutPort(value = "METADATA", description = "Resultset Metadata in JSON", optional = true)
+        , @OutPort(value = "CONN", type = Connection.class, optional = true)})
 @InPortWidget(value = "QUERY",widget = "sql-edit")
 public class SqlQuery extends Component{
     InputPort inConn;
     InputPort inQuery;
     OutputPort outOut;
     OutputPort outConn;
+    OutputPort outMeta;
 
     @Override
     protected void execute() throws Exception {
@@ -32,8 +35,9 @@ public class SqlQuery extends Component{
 
        String qry = (String) p2.getContent();
        Connection connection = (Connection) p.getContent();
-       JSONArray jsonArray = new JSONArray();
-
+        JSONArray datas = new JSONArray();
+        JSONArray metas = new JSONArray();
+        boolean metacollect = true;
         try {
             if(!connection.isClosed()){
                 PreparedStatement ps =connection.prepareStatement(qry);
@@ -44,36 +48,48 @@ public class SqlQuery extends Component{
                 while(rs.next()){
                     JSONObject jsonObject = new JSONObject();
                     for(int i=1;i<=rsm.getColumnCount();i++){
-                        jsonObject.put(rsm.getColumnName(i),rs.getObject(i));
+                        jsonObject.put(rsm.getColumnLabel(i), rs.getObject(i));
+                        if (metacollect && outMeta.isConnected()) {
+                            JSONObject metaData = new JSONObject();
+                            metaData.put("column", rsm.getColumnName(i));
+                            metaData.put("type", rsm.getColumnTypeName(i));
+                            metaData.put("scale", rsm.getScale(i));
+                            metaData.put("precision", rsm.getPrecision(i));
+                            metaData.put("label", rsm.getColumnLabel(i));
+                            metaData.put("nullable", rsm.isNullable(i));
+                            metas.put(metaData);
+                        }
                     }
-                    jsonArray.put(jsonObject);
+                    metacollect = false;
+                    datas.put(jsonObject);
                 }
             }
 
         } catch (SQLException | JSONException e) {
             e.printStackTrace();
-            jsonArray.put(e.getMessage());
+            JSONObject err = new JSONObject();
+            err.put("status", -1);
+            err.put("message", e.getMessage());
+            datas.put(err);
         }
-
-        outOut.send(create(jsonArray.toString(1)));
+        outOut.send(create(datas.toString(1)));
         outConn.send(p);
-
+        if (outMeta.isConnected()) {
+            outMeta.send(create(metas.toString(1)));
+        }
         drop(p2);
       // drop(p);
        inConn.close();
        inQuery.close();
 
-
-
     }
 
     @Override
     protected void openPorts() {
-
        inConn = openInput("CONN");
        inQuery = openInput("QUERY");
        outOut = openOutput("OUT");
        outConn = openOutput("CONN");
-
+        outMeta = openOutput("METADATA");
     }
 }

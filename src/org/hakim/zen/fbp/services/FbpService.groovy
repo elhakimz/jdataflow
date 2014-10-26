@@ -4,11 +4,7 @@ import org.hakim.fbp.util.Settings
 import org.hakim.fbp.util.Util
 import org.json.JSONArray
 
-import javax.ws.rs.GET
-import javax.ws.rs.POST
-import javax.ws.rs.Path
-import javax.ws.rs.PathParam
-import javax.ws.rs.Produces
+import javax.ws.rs.*
 
 /**
  * Purpose:
@@ -22,7 +18,6 @@ class FbpService {
     @Produces("application/json")
     String list() {
         println("Calling list()");
-
         List<String> results = new ArrayList<>();
         File[] files = new File(Settings.SYS_APP_DIR+"/WEB-INF/repository/fbp/").listFiles();
         println("files = " + files);
@@ -34,7 +29,6 @@ class FbpService {
         }
         JSONArray jsonArray = new JSONArray(results.toArray());
         return jsonArray.toString();
-
     }
 
     @GET
@@ -42,7 +36,6 @@ class FbpService {
     @Produces("text/plain")
     String getFile(@PathParam("file")String fileName) {
        String fname= fileName.replace('|','/');
-
        System.out.println("fname = " + fname);
        String fileContents = new File(fname).getText('UTF-8')
        return fileContents;
