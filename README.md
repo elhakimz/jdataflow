@@ -16,6 +16,11 @@ Requirements
 - Recent HTML browser
 - Libraries: FBP Library, Meemoo Dataflow codes, JAX-RS, JDBC (For db development), Bootstrap 3.0 and extensions, ACE Editor (JS), JQuery UI and extensions. 
 
+Development
+------------
+- You can use Eclipse, IntelliJ or Netbeans. make sure the /web folder is marked as your web app root.
+- Please changes the values in src/Application.properties to your own directory especially "app.location" and database properties.
+
 Screenshots
 -----------
 Open the diagram
