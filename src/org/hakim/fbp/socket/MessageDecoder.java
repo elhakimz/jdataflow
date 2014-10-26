@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
-import java.io.StringReader;
 
 /**
  * Purpose:
