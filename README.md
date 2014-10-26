@@ -20,6 +20,7 @@ Development
 ------------
 - You can use Eclipse, IntelliJ or Netbeans. make sure the /web folder is marked as your web app root.
 - Please change the values in src/Application.properties to your own directory especially "app.location" and database properties.
+- For IntelliJ user, you should enable the Groovy Language support plugin, for any other editor, please check your documentation. Because I plan the FBP components can be created from any JVM language like Ruby or Jython
 
 Screenshots
 -----------
