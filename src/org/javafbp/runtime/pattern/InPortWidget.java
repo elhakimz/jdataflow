@@ -11,16 +11,20 @@ import java.lang.annotation.RetentionPolicy;
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface InPortWidget {
-    public static final String SELECT_DIRECTORY="select-dir";
-    public static final String SELECT_REPOSITORY="select-repo";
-    public static final String SELECT_SCRIPT="select-script";
 
-    public static final String GROOVY_EDIT="groovy-edit";
-    public static final String JS_EDIT="js-edit";
-    public static final String SQL_EDIT="sql-edit";
-    public static final String XML_EDIT="xml-edit";
+    public static final String SELECT_ABS_DIR = "select-abs-dir";
+    public static final String SELECT_DIRECTORY = "select-dir";
+    public static final String SELECT_REPOSITORY = "select-repo";
+    public static final String SELECT_SCRIPT = "select-script";
+
+    public static final String GROOVY_EDIT = "groovy-edit";
+    public static final String JS_EDIT = "js-edit";
+    public static final String SQL_EDIT = "sql-edit";
+    public static final String XML_EDIT = "xml-edit";
 
     String value();
+
     String widget();
+
     String config() default "";
 }

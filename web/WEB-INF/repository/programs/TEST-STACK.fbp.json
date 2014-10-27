@@ -1,0 +1,120 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "color": "",
+            "label": "ListFiles1",
+            "type": "io.ListFiles",
+            "javaType": "org.javafbp.runtime.components.io.ListFiles",
+            "description": "",
+            "x": 403,
+            "y": 156,
+            "state": {
+                "PATH": "/Users/abilhakim/Documents/LIBS/RFID-SDK/bluecove-2.1.0"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 2,
+            "color": "hsl(210, 68%, 70%)",
+            "label": "SendEach2",
+            "type": "base.SendEach",
+            "javaType": "org.javafbp.runtime.components.base.SendEach",
+            "description": "",
+            "x": 665,
+            "y": 156,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 5,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "WriteToConsole5",
+            "type": "core.WriteToConsole",
+            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+            "description": "",
+            "x": 1441.6666666666665,
+            "y": 151,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 3,
+            "color": "",
+            "label": "ReplaceString3",
+            "type": "text.ReplaceString",
+            "javaType": "com.jpmorrsn.fbp.text.ReplaceString",
+            "description": "",
+            "x": 930.5,
+            "y": 146,
+            "state": {
+                "FIND": "/Users/abilhakim/Documents/LIBS/RFID-SDK/bluecove-2.1.0",
+                "REPL": "."
+            },
+            "w": 200,
+            "h": 225
+        },
+        {
+            "id": 4,
+            "color": "hsl(210, 68%, 70%)",
+            "label": "StackStreams4",
+            "type": "base.StackStreams",
+            "javaType": "org.javafbp.runtime.components.base.StackStreams",
+            "description": "",
+            "x": 1178.5,
+            "y": 148,
+            "state": {},
+            "w": 200,
+            "h": 75
+        }
+    ],
+    "edges": [
+        {
+            "source": {
+                "node": 1,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 2,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 2,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 3,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 3,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 4,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 4,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 5,
+                "port": "IN"
+            },
+            "route": 4
+        }
+    ]
+}
