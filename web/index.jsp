@@ -1,5 +1,4 @@
 <%@ page import="org.hakim.fbp.common.FbpCompJsBuilder" %>
-
 <%--
   Developer: abiel
 --%>
@@ -10,20 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Dataflow graph editor</title>
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!-- Style -->
-
-    <!--
-    'themes/default/font-proximanova.css',
-              'themes/default/font-awesome.css',
-              'themes/default/dataflow.css',
-              'themes/default/modules/node.css',
-              'themes/default/modules/edge.css',
-              'themes/default/modules/port.css',
-              'themes/default/modules/card.css',
-              'themes/default/modules/jqui.css',
-              'themes/default/modules/search.css'
-              -->
+    <script src="libs/jquery-2.1.1.min.js"></script>
+    <script src="libs/modernizr-latest.js"></script>
+    <script src="libs/jquery.json-2.2.min.js"></script>
+    <script src="libs/loadie.js"></script>
 
     <link rel="stylesheet" href="themes/default/font-proximanova.css" />
     <link rel="stylesheet" href="themes/default/font-awesome.css" />
@@ -39,34 +28,13 @@
     <link rel="stylesheet" href="libs/pnotify.custom.min.css"/>
     <link href="libs/treeview/bootstrap-treeview.css" rel="stylesheet">
 
-
-
 </head>
 
-<body><div  id="dlg" class="modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 id="dlg-title" class="modal-title">Modal title</h4>
-            </div>
-            <div id="dlg-body" class="modal-body">
-                <p>One fine body…</p>
-            </div>
-            <div id="dlg-modal-footer" class="modal-footer">
-                <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="dlg-btn-action" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+<body>
 <!-- Third-Party Libraries -->
-<script src="libs/jquery-2.1.1.min.js"></script>
-<script src="libs/modernizr-latest.js"></script>
-<script src="libs/jquery.json-2.2.min.js"></script>
+<script>$('body').loadie(10); </script>
 <script src="libs/jquery-ui-1.11.1/jquery-ui.js"></script>
 <%--<link href="libs/jquery-ui-1.11.1/jquery-ui.css" rel="stylesheet">--%>
-
 <script type="application/javascript" src="themes/bootstrap.js"></script>
 <script type="application/javascript" src="libs/pnotify.custom.min.js"></script>
 <script type="application/javascript" src="libs/treeview/bootstrap-treeview.js"></script>
@@ -119,7 +87,7 @@
 <script src="src/plugins/open-save.js"></script>
 <script src="src/plugins/run-graph.js"></script>
 
-
+<script>$('body').loadie(20); </script>
 <!-- Nodes (some basics to extend) -->
 <script src="src/nodes/base.js"></script>
 <script src="src/nodes/base-resizable.js"></script>
@@ -131,7 +99,7 @@
 <script src="src/nodes/dataflow-input.js"></script>
 <script src="src/nodes/dataflow-output.js"></script>
 <!-- components, can be generated from servlet -->
-
+<script>$('body').loadie(30); </script>
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("com.jpmorrsn.fbp.components")%>
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("com.jpmorrsn.fbp.text")%>
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("com.jpmorrsn.fbp.examples.components")%>
@@ -144,22 +112,20 @@
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("org.javafbp.runtime.components.net")%>
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("org.javafbp.runtime.components.zen")%>
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("org.javafbp.runtime.components.io")%>
+<script>$('body').loadie(60); </script>
 <script src="libs/ace/ace.js"></script>
 <script src="libs/ace/theme-eclipse.js"></script>
 <script src="libs/ace/theme-solarized_dark.js"></script>
 <script src="libs/ace/theme-twilight.js"></script>
-
+<script>$('body').loadie(70); </script>
 <script src="libs/ace/mode-groovy.js"></script>
 <script src="libs/ace/mode-javascript.js"></script>
 <script src="libs/ace/mode-sql.js"></script>
 <script src="libs/ace/mode-xml.js"></script>
-
 <script src="libs/jquery-ace.min.js"></script>
-
+<script src="libs/jsoneditor.min.js"></script>
 <script>
-    $(function($) {
-        // Everything should be loaded now
-
+    $(document).ready(function ($) {
         // Spin up app
         var dataflow = new window.Dataflow();
         // Load test graph
@@ -209,9 +175,6 @@
 
         );
         g.trigger("change");
-
-
-
         $.dform.addType("xbutton", function(options) {
             // Return a new button element that has all options that
             // don't have a registered subscriber as attributes
@@ -219,9 +182,27 @@
         });
         $('.dataflow-port-label.in').tooltip();
 
-
     });
-</script>
 
+</script>
+<script>$('body').loadie(100); </script>
+<div id="dlg" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 id="dlg-title" class="modal-title">Modal title</h4>
+            </div>
+            <div id="dlg-body" class="modal-body">
+                <p>One fine body…</p>
+            </div>
+            <div id="dlg-modal-footer" class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="dlg-btn-action" class="btn btn-primary" data-dismiss="modal">Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
