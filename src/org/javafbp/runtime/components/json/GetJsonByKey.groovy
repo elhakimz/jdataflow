@@ -1,13 +1,6 @@
 package org.javafbp.runtime.components.json
 
-import com.jpmorrsn.fbp.engine.Component
-import com.jpmorrsn.fbp.engine.ComponentDescription
-import com.jpmorrsn.fbp.engine.InPort
-import com.jpmorrsn.fbp.engine.InPorts
-import com.jpmorrsn.fbp.engine.InputPort
-import com.jpmorrsn.fbp.engine.OutPort
-import com.jpmorrsn.fbp.engine.OutputPort
-import com.jpmorrsn.fbp.engine.Packet
+import com.jpmorrsn.fbp.engine.*
 import org.json.JSONObject
 
 /**
@@ -28,10 +21,9 @@ class GetJsonByKey extends Component {
     protected void execute() throws Exception {
         Packet p1 = inIn.receive()
         Packet p2 = inKey.receive()
-
+        println "p1 = $p1"
         JSONObject json = new JSONObject(p1.content)
         String key = p2.content
-
         Object res = json.get(key)
         outOut.send(create(res))
 
