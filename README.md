@@ -56,6 +56,8 @@ Credits:
 - Forrest Oliphant (https://github.com/forresto)
 - Henri Bergius (https://github.com/bergie) 
 
+Inspirational video from Bret Victor
+(https://www.youtube.com/watch?v=PUv66718DII)
 
 TODO
 ----
