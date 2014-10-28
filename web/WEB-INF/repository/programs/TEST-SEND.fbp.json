@@ -64,7 +64,7 @@
             "x": 1034.3333333333333,
             "y": 213.5,
             "state": {
-                "KEY": "TABLE_NAME"
+                "KEY": "Tables_in_mandaladb"
             },
             "w": 200,
             "h": 150
@@ -83,6 +83,19 @@
             "h": 75
         },
         {
+            "id": 8,
+            "color": "",
+            "label": "CreateTextFile8",
+            "type": "io.CreateTextFile",
+            "javaType": "org.javafbp.runtime.components.io.CreateTextFile",
+            "description": "",
+            "x": 1820.6666666666665,
+            "y": 141,
+            "state": {},
+            "w": 200,
+            "h": 150
+        },
+        {
             "id": 5,
             "color": "hsl(210, 68%, 70%)",
             "label": "StringAffix5",
@@ -97,19 +110,6 @@
             },
             "w": 200,
             "h": 225
-        },
-        {
-            "id": 8,
-            "color": "hsl(219, 16%, 76%)",
-            "label": "WriteFile8",
-            "type": "core.WriteFile",
-            "javaType": "com.jpmorrsn.fbp.components.WriteFile",
-            "description": "",
-            "x": 1817.3333333333333,
-            "y": 97,
-            "state": {},
-            "w": 200,
-            "h": 150
         },
         {
             "id": 7,
@@ -187,28 +187,6 @@
                 "port": "OUT"
             },
             "target": {
-                "node": 8,
-                "port": "IN"
-            },
-            "route": 4
-        },
-        {
-            "source": {
-                "node": 8,
-                "port": "OUT"
-            },
-            "target": {
-                "node": 7,
-                "port": "IN"
-            },
-            "route": 4
-        },
-        {
-            "source": {
-                "node": 9,
-                "port": "OUT"
-            },
-            "target": {
                 "node": 5,
                 "port": "IN"
             },
@@ -222,6 +200,28 @@
             "target": {
                 "node": 8,
                 "port": "DESTINATION"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 9,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 8,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 8,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 7,
+                "port": "IN"
             },
             "route": 4
         }

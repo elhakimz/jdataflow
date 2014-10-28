@@ -1,0 +1,134 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "color": "hsl(210, 68%, 70%)",
+            "label": "CurrentDate1",
+            "type": "base.CurrentDate",
+            "javaType": "org.javafbp.runtime.components.base.CurrentDate",
+            "description": "",
+            "x": 356,
+            "y": 161,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 2,
+            "color": "",
+            "label": "SubGraph",
+            "type": "dataflow-subgraph",
+            "javaType": "com.jpmorrsn.fbp.engine.SubNet",
+            "description": "",
+            "x": 614,
+            "y": 158,
+            "state": {},
+            "w": 250,
+            "h": 200,
+            "graph": {
+                "nodes": [
+                    {
+                        "id": 1,
+                        "color": "",
+                        "label": "in",
+                        "type": "dataflow-input",
+                        "javaType": "com.jpmorrsn.fbp.engine.SubIn",
+                        "description": "",
+                        "x": 180,
+                        "y": 15,
+                        "state": {},
+                        "input-type": "all"
+                    },
+                    {
+                        "id": 2,
+                        "color": "hsl(210, 68%, 70%)",
+                        "label": "FormatDate2",
+                        "type": "base.FormatDate",
+                        "javaType": "org.javafbp.runtime.components.base.FormatDate",
+                        "description": "",
+                        "x": 469,
+                        "y": 213,
+                        "state": {
+                            "FMT": "dd-MM-yyyy"
+                        },
+                        "w": 200,
+                        "h": 150
+                    },
+                    {
+                        "id": 99,
+                        "color": "",
+                        "label": "out",
+                        "type": "dataflow-output",
+                        "javaType": "com.jpmorrsn.fbp.engine.SubOut",
+                        "description": "",
+                        "x": 975,
+                        "y": 500,
+                        "state": {},
+                        "output-type": "all"
+                    }
+                ],
+                "edges": [
+                    {
+                        "source": {
+                            "node": 1,
+                            "port": "data"
+                        },
+                        "target": {
+                            "node": 2,
+                            "port": "IN"
+                        },
+                        "route": 3
+                    },
+                    {
+                        "source": {
+                            "node": 2,
+                            "port": "OUT"
+                        },
+                        "target": {
+                            "node": 99,
+                            "port": "data"
+                        },
+                        "route": 4
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "WriteToConsole3",
+            "type": "core.WriteToConsole",
+            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+            "description": "",
+            "x": 985,
+            "y": 163,
+            "state": {},
+            "w": 200,
+            "h": 75
+        }
+    ],
+    "edges": [
+        {
+            "source": {
+                "node": 1,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 2,
+                "port": 1
+            },
+            "route": 3
+        },
+        {
+            "source": {
+                "node": 2,
+                "port": 99
+            },
+            "target": {
+                "node": 3,
+                "port": "IN"
+            },
+            "route": 4
+        }
+    ]
+}

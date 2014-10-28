@@ -31,63 +31,65 @@ public class FbpRunnerServlet extends HttpServlet {
     FbpRuntime runtime;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       String func=request.getParameter("func");
-       String data=request.getParameter("data");
+        String func = request.getParameter("func");
+        String data = request.getParameter("data");
 
-       ServletContext servletContext = getServletContext();
-       String contextPath  = servletContext.getRealPath(File.separator);
-       PrintStream console = System.out;
+        ServletContext servletContext = getServletContext();
+        String contextPath = servletContext.getRealPath(File.separator);
+        PrintStream console = System.out;
 
-       if(func.equals("go")){
-           try {
-               String log= null;
+        switch (func) {
+            case "go":
+                try {
+                    String log = null;
+                    log = goFbp(data);
+                    response.getWriter().println(log);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    response.getWriter().println("-1");
+                }
 
-               log = goFbp(data);
+                break;
+            case "get-param":
+                response.setContentType("application/json");
+                try {
+                    response.getWriter().println(getInitialParam(data));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    response.getWriter().print("-1");
+                }
 
-               response.getWriter().println(log);
-           } catch (Exception e) {
-               e.printStackTrace();
-               response.getWriter().println("-1");
-           }
+                break;
+            case "go-param":
+                JSONObject json = new JSONObject(data);
+                try {
+                    String graph = json.getString("data");
+                    String param = json.getString("params");
+                    JSONArray paramz = new JSONArray(param);
+                    String result = goFbp(graph, paramz);
+                    response.getWriter().print(result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    response.getWriter().print("-1");
+                }
 
-       } else if(func.equals("get-param")){
-           response.setContentType("application/json");
-           try {
-               response.getWriter().println(getInitialParam(data));
-           } catch (Exception e) {
-               e.printStackTrace();
-               response.getWriter().print("-1");
-           }
-
-       } else if(func.equals("go-param")){
-          JSONObject json=new JSONObject(data);
-           try {
-               String graph=json.getString("data");
-               String param = json.getString("params");
-               JSONArray paramz=new JSONArray(param);
-               String result=goFbp(graph,paramz);
-               response.getWriter().print(result);
-           } catch (Exception e) {
-               e.printStackTrace();
-               response.getWriter().print("-1");
-           }
-
-       }
+                break;
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
-    private String getInitialParam(Object data) throws Exception{
+    private String getInitialParam(Object data) throws Exception {
         System.out.println("getting initial parameter..");
-        Map<String,Object> flds = new LinkedHashMap<>();
+        Map<String, Object> flds = new LinkedHashMap<>();
         FbpGraphModel graphModel = FbpJsonToModel.convert(data);
-        for(FbpNodeModel node:graphModel.getNodes()){
-          for(Object k:node.getState().keySet()){
+        for (FbpNodeModel node : graphModel.getNodes()) {
+            for (Object k : node.getState().keySet()) {
                 Object v = node.getState().get(k);
                 String lbl = node.getLabel();
-                flds.put(lbl+"."+k,v);
+                flds.put(lbl + "." + k, v);
             }
         }
         JSONObject form = JsonFormUtil.createForm(flds);
@@ -97,24 +99,25 @@ public class FbpRunnerServlet extends HttpServlet {
 
     /**
      * run fbp
+     *
      * @param data
      * @return
      */
     private String goFbp(String data) throws Exception {
-        return goFbp(data,null);
+        return goFbp(data, null);
     }
 
     /**
      * Run FBP Graph
+     *
      * @param data
      * @return
      */
-    private String goFbp(String data,Object params) throws Exception{
+    private String goFbp(String data, Object params) throws Exception {
 
         FbpRuntime runtime;
-
         PrintStream console = System.out;
-        String LOG_FILE_NAME= Settings.CONTEXT_PATH+"WEB-INF/runtime/log.txt";
+        String LOG_FILE_NAME = Settings.CONTEXT_PATH + "WEB-INF/runtime/log.txt";
 
         File file = new File(LOG_FILE_NAME);
         FileOutputStream fos;
@@ -129,28 +132,27 @@ public class FbpRunnerServlet extends HttpServlet {
 
         try {
             FbpGraphModel graphModel = FbpJsonToModel.convert(data);
-            if(params==null) json.put("message","go"); else
-                json.put("message","go-param");
+            if (params == null) json.put("message", "go");
+            else
+                json.put("message", "go-param");
             JSONArray paramz;
-            if(params instanceof JSONArray ){
-                paramz= (JSONArray) params;
-            }else{
-                paramz= new JSONArray(params);
+            if (params instanceof JSONArray) {
+                paramz = (JSONArray) params;
+            } else {
+                paramz = new JSONArray(params);
             }
-
-            runtime = new FbpRuntime(graphModel,paramz);
+            runtime = new FbpRuntime(graphModel, paramz);
             Util.writeLog("..executing flow..");
             runtime.go();
             Util.writeLog("execution SUCCESS");
-            json.put("status","1");
+            json.put("status", "1");
         } catch (Exception e) {
             e.printStackTrace();
             Util.writeLog("ERROR in executing flow:\n" + e.getMessage());
-            json.put("message","FBP programm had errors");
-            json.put("status","-1");
+            json.put("message", "FBP programm had errors");
+            json.put("status", "-1");
         }
-
-        String log="";
+        String log = "";
         System.setOut(console);
         try {
             log = Util.readFile(LOG_FILE_NAME);
