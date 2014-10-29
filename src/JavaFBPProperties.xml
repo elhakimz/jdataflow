@@ -1,5 +1,5 @@
 <?xml version="1.0"?> 
-<properties> 
-<tracing>false</tracing>
-<tracelocks>false</tracelocks>
+<properties>
+    <tracing>true</tracing>
+    <tracelocks>true</tracelocks>
 </properties> 

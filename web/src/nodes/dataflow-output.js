@@ -30,7 +30,7 @@
         },
         inputs: [
             {
-                id: "data",
+                id: "IN",
                 type: "all"
             }
         ],

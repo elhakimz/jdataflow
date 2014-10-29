@@ -8,22 +8,27 @@ package org.hakim.fbp.common.model
  */
 class FbpEdgeModel {
 
-    FbpNodePort source= new FbpNodePort()
-    FbpNodePort target= new FbpNodePort()
+    FbpNodePort source = new FbpNodePort()
+    FbpNodePort target = new FbpNodePort()
     int route
 
-    void setSourcePort(int node, String port){
+    void setSourcePort(int node, def port) {
         source.node = node
         source.port = port
-    }
-    void setTargetPort(int node, String port){
-       target.node = node
-       target.port = port
+        if (port instanceof String) source.portName = port
     }
 
-    public class FbpNodePort{
+    void setTargetPort(int node, def port) {
+        target.node = node
+        target.port = port
+        if (port instanceof String) target.portName = port
+
+    }
+
+    public class FbpNodePort {
         int node
-        String port
+        def port           //cant decide the type
+        def portName       //port representation
         int count = 0
     }
 }

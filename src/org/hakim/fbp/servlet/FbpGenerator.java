@@ -86,15 +86,15 @@ public class FbpGenerator {
             outPort = (OutPort) cls.getAnnotation(OutPort.class);
             OutPorts outPorts = (OutPorts) cls.getAnnotation(OutPorts.class);
 
-            if (outPorts != null) {
-                for (OutPort op : outPorts.value()) {
-                    if (op.arrayPort() && op.value().equals(source.getPort()))
-                        source.setPort(getArrOutPortName(srcLabel, source));
-                }
-
-            } else if (outPort != null && outPort.arrayPort()) {
-                source.setPort(getArrOutPortName(srcLabel, source));
-            }
+//            if (outPorts != null) {
+//                for (OutPort op : outPorts.value()) {
+//                    if (op.arrayPort() && op.value().equals(source.getPort()))
+//                        source.setPort(getArrOutPortName(srcLabel, source));
+//                }
+//
+//            } else if (outPort != null && outPort.arrayPort()) {
+//                source.setPort(getArrOutPortName(srcLabel, source));
+//            }
 
             if (arrIdx != -1) {
                 String s = String.format("\tconnect(component(\"%s\"), port(\"%s\",%d),component(\"%s\"), port(\"%s\"));\n"
@@ -225,9 +225,9 @@ public class FbpGenerator {
         String ret;
         if (!srcPortMap.containsKey(srcLabel)) srcPortMap.put(srcLabel, source);
         FbpEdgeModel.FbpNodePort p = srcPortMap.get(srcLabel);
-        String s = p.getPort();
-        if (p.getPort().contains("[")) {
-            s = p.getPort().substring(0, p.getPort().indexOf("["));
+        String s = String.valueOf(p.getPort());
+        if (s.contains("[")) {
+            s = s.substring(0, s.indexOf("["));
         }
         arrOutportName = s;
         ret = s + "[" + p.getCount() + "]";
@@ -242,9 +242,9 @@ public class FbpGenerator {
         Map<String, FbpEdgeModel.FbpNodePort> srcPortMap = srcSubPortMap.get(subnetName);
         if (!srcPortMap.containsKey(srcLabel)) srcPortMap.put(srcLabel, source);
         FbpEdgeModel.FbpNodePort p = srcPortMap.get(srcLabel);
-        String s = p.getPort();
-        if (p.getPort().contains("[")) {
-            s = p.getPort().substring(0, p.getPort().indexOf("["));
+        String s = String.valueOf(p.getPort());
+        if (((String) p.getPort()).contains("[")) {
+            s = ((String) p.getPort()).substring(0, ((String) p.getPort()).indexOf("["));
         }
         String arrOutportName = arrOutportNameMap.put(subnetName, s);
         ret = s + "[" + p.getCount() + "]";

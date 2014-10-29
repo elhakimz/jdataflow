@@ -84,7 +84,8 @@ public class FbpRunnerServlet extends HttpServlet {
     private String getInitialParam(Object data) throws Exception {
         System.out.println("getting initial parameter..");
         Map<String, Object> flds = new LinkedHashMap<>();
-        FbpGraphModel graphModel = FbpJsonToModel.convert(data);
+        FbpJsonToModel jsonToModel = new FbpJsonToModel();
+        FbpGraphModel graphModel = jsonToModel.convert(data);
         for (FbpNodeModel node : graphModel.getNodes()) {
             for (Object k : node.getState().keySet()) {
                 Object v = node.getState().get(k);
@@ -131,7 +132,8 @@ public class FbpRunnerServlet extends HttpServlet {
         JSONObject json = new JSONObject();
 
         try {
-            FbpGraphModel graphModel = FbpJsonToModel.convert(data);
+            FbpJsonToModel jsonToModel = new FbpJsonToModel();
+            FbpGraphModel graphModel = jsonToModel.convert(data);
             if (params == null) json.put("message", "go");
             else
                 json.put("message", "go-param");

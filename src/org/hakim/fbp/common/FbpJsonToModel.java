@@ -17,11 +17,11 @@ import java.util.List;
  */
 public class FbpJsonToModel {
 
-    static JSONArray nodes;
-    static JSONArray edges;
+    JSONArray nodes;
+    JSONArray edges;
 
 
-    public static FbpGraphModel convert(Object jsonstr) {
+    public FbpGraphModel convert(Object jsonstr) {
         FbpGraphModel graphModel = new FbpGraphModel();
         JSONObject json;
 
@@ -31,8 +31,6 @@ public class FbpJsonToModel {
             json = new JSONObject((String) jsonstr);
         }
 
-        //Gson gson = new Gson();
-        //Object o = gson.fromJson(String.valueOf(jsonstr),new TypeToken<Map<String, String>>() {}.getType());
 
         nodes = json.getJSONArray("nodes");
         edges = json.getJSONArray("edges");
@@ -59,8 +57,11 @@ public class FbpJsonToModel {
             lstEdge.add(obj);
         }
 
+        System.out.println("lstEdge = " + lstEdge);
+
         for (JSONObject jso : lstEdge) {
             graphModel.addEdge(convertEdges(jso));
+
         }
 
 
@@ -73,7 +74,7 @@ public class FbpJsonToModel {
      * @param jsonObject
      * @return
      */
-    private static FbpNodeModel convertNodes(JSONObject jsonObject) {
+    private FbpNodeModel convertNodes(JSONObject jsonObject) {
         FbpNodeModel nodeModel = new FbpNodeModel();
 
         nodeModel.setId(jsonObject.getInt("id"));
@@ -85,7 +86,8 @@ public class FbpJsonToModel {
             nodeModel.getState().put(s, state.get((String) s));
         }
         if (jsonObject.has("graph")) {
-            FbpGraphModel graphModel = convert(jsonObject.get("graph"));
+            FbpJsonToModel jsonToModel = new FbpJsonToModel();
+            FbpGraphModel graphModel = jsonToModel.convert(jsonObject.get("graph"));
             nodeModel.setGraph(graphModel);
         }
 
@@ -99,15 +101,12 @@ public class FbpJsonToModel {
      * @param jsonObject
      * @return
      */
-    private static FbpEdgeModel convertEdges(JSONObject jsonObject) {
+    private FbpEdgeModel convertEdges(JSONObject jsonObject) {
         FbpEdgeModel edgeModel = new FbpEdgeModel();
         JSONObject source = jsonObject.getJSONObject("source");
         JSONObject target = jsonObject.getJSONObject("target");
-
-        edgeModel.setSourcePort(source.getInt("node"), (String) source.get("port"));
-        System.out.println("target = " + target);
-        edgeModel.setTargetPort(target.getInt("node"), (String) target.get("port"));
-
+        edgeModel.setSourcePort(source.getInt("node"), String.valueOf(source.get("port")));
+        edgeModel.setTargetPort(target.getInt("node"), String.valueOf(target.get("port")));
         edgeModel.setRoute(jsonObject.getInt("route"));
 
         return edgeModel;

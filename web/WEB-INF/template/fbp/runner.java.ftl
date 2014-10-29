@@ -40,8 +40,8 @@ ${conn}
 //subnets
 <#list model.subnets as subnet>
 @ComponentDescription("${subnet.description}")
-@InPort("in")
-@OutPort("out")
+@InPort("IN")
+@OutPort("OUT")
 class ${subnet.name} extends SubNet{
 protected void define() throws Exception {
     <#list subnet.components as comp2>
@@ -51,6 +51,8 @@ protected void define() throws Exception {
     <#list subnet.iips as iip2>
     ${iip2}
     </#list>
+initialize("OUT", component("OUT"), port("NAME"));
+initialize("IN", component("IN"), port("NAME"));
 
 //Connections
     <#list subnet.connections as conn2>

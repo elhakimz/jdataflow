@@ -16,28 +16,56 @@
         {
             "id": 2,
             "color": "",
-            "label": "SubGraph",
+            "label": "MySubgraph",
             "type": "dataflow-subgraph",
             "javaType": "com.jpmorrsn.fbp.engine.SubNet",
             "description": "",
-            "x": 614,
-            "y": 158,
+            "x": 642,
+            "y": 145,
             "state": {},
-            "w": 250,
-            "h": 200,
+            "w": 230,
+            "h": 106,
             "graph": {
                 "nodes": [
                     {
                         "id": 1,
                         "color": "",
-                        "label": "in",
+                        "label": "IN",
                         "type": "dataflow-input",
                         "javaType": "com.jpmorrsn.fbp.engine.SubIn",
                         "description": "",
-                        "x": 180,
-                        "y": 15,
+                        "x": -73,
+                        "y": 110,
                         "state": {},
                         "input-type": "all"
+                    },
+                    {
+                        "id": 4,
+                        "color": "hsl(210, 68%, 70%)",
+                        "label": "FormatDate4",
+                        "type": "base.FormatDate",
+                        "javaType": "org.javafbp.runtime.components.base.FormatDate",
+                        "description": "",
+                        "x": 524,
+                        "y": 26,
+                        "state": {
+                            "FMT": "dd/MMM/yyyy"
+                        },
+                        "w": 200,
+                        "h": 150
+                    },
+                    {
+                        "id": 3,
+                        "color": "",
+                        "label": "SPLIT",
+                        "type": "flow.SplitStream",
+                        "javaType": "org.javafbp.runtime.components.flow.SplitStream",
+                        "description": "",
+                        "x": 194,
+                        "y": 111,
+                        "state": {},
+                        "w": 200,
+                        "h": 75
                     },
                     {
                         "id": 2,
@@ -46,23 +74,36 @@
                         "type": "base.FormatDate",
                         "javaType": "org.javafbp.runtime.components.base.FormatDate",
                         "description": "",
-                        "x": 469,
-                        "y": 213,
+                        "x": 521,
+                        "y": 270,
                         "state": {
-                            "FMT": "dd-MM-yyyy"
+                            "FMT": "dd-MMM-yyyy"
                         },
                         "w": 200,
                         "h": 150
                     },
                     {
+                        "id": 5,
+                        "color": "",
+                        "label": "MergeStream5",
+                        "type": "flow.MergeStream",
+                        "javaType": "org.javafbp.runtime.components.flow.MergeStream",
+                        "description": "",
+                        "x": 823,
+                        "y": 117,
+                        "state": {},
+                        "w": 200,
+                        "h": 75
+                    },
+                    {
                         "id": 99,
                         "color": "",
-                        "label": "out",
+                        "label": "OUT",
                         "type": "dataflow-output",
                         "javaType": "com.jpmorrsn.fbp.engine.SubOut",
                         "description": "",
-                        "x": 975,
-                        "y": 500,
+                        "x": 1056,
+                        "y": 113,
                         "state": {},
                         "output-type": "all"
                     }
@@ -71,7 +112,18 @@
                     {
                         "source": {
                             "node": 1,
-                            "port": "data"
+                            "port": "OUT"
+                        },
+                        "target": {
+                            "node": 3,
+                            "port": "IN"
+                        },
+                        "route": 0
+                    },
+                    {
+                        "source": {
+                            "node": 3,
+                            "port": "OUT"
                         },
                         "target": {
                             "node": 2,
@@ -85,8 +137,41 @@
                             "port": "OUT"
                         },
                         "target": {
+                            "node": 5,
+                            "port": "IN"
+                        },
+                        "route": 4
+                    },
+                    {
+                        "source": {
+                            "node": 5,
+                            "port": "OUT"
+                        },
+                        "target": {
                             "node": 99,
-                            "port": "data"
+                            "port": "IN"
+                        },
+                        "route": 0
+                    },
+                    {
+                        "source": {
+                            "node": 3,
+                            "port": "OUT"
+                        },
+                        "target": {
+                            "node": 4,
+                            "port": "IN"
+                        },
+                        "route": 3
+                    },
+                    {
+                        "source": {
+                            "node": 4,
+                            "port": "OUT"
+                        },
+                        "target": {
+                            "node": 5,
+                            "port": "IN"
                         },
                         "route": 4
                     }

@@ -33,7 +33,7 @@
         ],
         outputs: [
             {
-                id: "data",
+                id: "OUT",
                 type: "all"
             }
         ]

@@ -21,8 +21,8 @@
 
             defaults.graph = {
                 nodes: [
-                    {id: 1, label: "in", type: "dataflow-input", x: 180, y: 15},
-                    {id: 99, label: "out", type: "dataflow-output", x: 975, y: 500}
+                    {id: 1, label: "IN", type: "dataflow-input", x: 180, y: 15},
+                    {id: 99, label: "OUT", type: "dataflow-output", x: 975, y: 500}
                 ]
             };
             return defaults;

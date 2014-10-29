@@ -26,6 +26,14 @@ class FbpScriptGenerator {
 
     private int arrIdx = -1
     private String arrOutportName = ""
+    boolean isSubnet = false
+
+    def subnetInPortMap = [:]
+    def subnetOutPortMap = [:]
+
+    def subnetOutport = [:]
+    def subnetInport = [:]
+    String SUBNET_CLASS_NAME = 'com.jpmorrsn.fbp.engine.SubNet';
 
     public FbpScriptGenerator(FbpGraphModel graphModel, JSONArray params) {
         this.graphModel = graphModel;
@@ -56,42 +64,104 @@ class FbpScriptGenerator {
         List<FbpNodeModel> nodeModels = graphModel.nodes
 
         for (FbpNodeModel node : nodeModels) {
+
             nodeModelMap[node.id] = node;
-            println "genComponents node name= ${node.label}, ${node.id}"
+            println "registering node name= ${nodeModelMap[node.id].label}, ${nodeModelMap[node.id].id}"
             if (!node.getClassType().empty) {
                 cls = Class.forName(node.classType)
-                if (!cls.equals(SubNet.class) && !cls.equals(Object.class)) {
-                    comp = String.format("\tcomponent(\"%s\",%s.class);\n", node.label, cls.name);
-                } else if (node.graph) {
+
+                if (this.isSubnet && (cls.equals(SubIn.class) || cls.equals(SubOut.class))) {
+                    if (cls.equals(SubIn.class))
+                        subnetInport[node.id] = node.label
+                    else if (cls.equals(SubOut.class))
+                        subnetOutport[node.id] = node.label
+
+                    comp = String.format("component(\"%s\",%s.class); //id=%d ", node.label, cls.name, node.id);
+
+                } else if (!cls.equals(SubNet.class) && !cls.equals(Object.class)) {
+
+                    comp = String.format("component(\"%s\",%s.class) //id=%d;", node.label, cls.name, node.id);
+
+                } else if (cls.equals(SubNet.class) || node.graph) {
                     FbpGraphModel graph = node.graph
                     FbpScriptGenerator generator = new FbpScriptGenerator(graph)
+                    generator.isSubnet = true
                     generator.define()
+                    subnetInPortMap[node.id] = generator.subnetInport
+                    subnetOutPortMap[node.id] = generator.subnetOutport
                     generator.programModel.name = node.label
                     programModel.subnets.add(generator.programModel)
-                    comp = String.format("\tcomponent(\"%s\",%s.class);\n", node.label, node.label);
+                    comp = String.format("component(\"%s\",%s.class) //id=%d;", node.label, node.label, node.id);
                 }
             } else {
-                comp = "\tcomponent(\"${node.label}\");\n"
+                comp = "component(\"${node.label}\");"
             }
             comps.add(comp)
         }
         return comps
     }
 
+
     List<String> genConnections() {
         def conns = []
-        for (FbpEdgeModel edge : graphModel.edges) {
+        List<FbpEdgeModel> edges = graphModel.edges
+        println "connecting ${edges.size()} edges"
+        for (FbpEdgeModel edge : edges) {
             FbpEdgeModel.FbpNodePort source = edge.source;
             FbpEdgeModel.FbpNodePort target = edge.target;
 
-            String srcLabel
-            srcLabel = nodeModelMap[source.node].label;
-            String targetLabel = '*'
+            int sourceId = source.node
+            int tgtId = target.node
 
-            try {
-                targetLabel = nodeModelMap[target.node].label;
-            } catch (e) {
+            FbpNodeModel srcNode = nodeModelMap[sourceId]
+            FbpNodeModel tgtNode = nodeModelMap[tgtId]
+
+            String srcLabel = (srcNode != null ? srcNode.label : '*')
+
+//            if(!srcNode){
+//                println "STRUCTURE FAIL: srcNode id=null =>" + sourceId+" issubnet= "+isSubnet
+//            }else{
+//
+//                if (srcNode.classType.trim().equals(SUBNET_CLASS_NAME)) {
+//                    def subnetoutp=subnetOutPortMap[srcNode.id]
+//                    srcLabel = subnetoutp[source.node]
+//                } else {
+//                    srcLabel = srcNode.label;
+//                }
+//            }
+
+
+            String targetLabel = (tgtNode != null ? tgtNode.label : '*')
+            if (targetLabel == '*') {
+                println "failed target id for labeling=" + tgtId
             }
+//            if(!tgtNode){
+//                println "STRUCTURE FAIL: tgtNode id=null =>" + tgtId+" issubnet= "+isSubnet
+//            }else{
+//                if(tgtNode.classType.trim().equals(SUBNET_CLASS_NAME)){
+//                    def subnetinp = subnetInPortMap[tgtNode.id]
+//                    targetLabel = subnetinp[target.node]
+//                }else{
+//                    targetLabel = tgtNode.label;
+//                }
+//            }
+
+            String sourcePort
+            if (String.valueOf(source.port).equals("99")) {
+                sourcePort = "OUT"
+            } else {
+                sourcePort = source.port
+            }
+
+            String targetPort
+            if (String.valueOf(target.port).equals("1")) {
+                targetPort = "IN"
+            } else {
+                targetPort = target.port
+            }
+
+
+            String codeString
 
             Class cls = Class.forName(nodeModelMap[source.node].classType);
             OutPort outPort;
@@ -100,28 +170,31 @@ class FbpScriptGenerator {
 
             if (outPorts != null) {
                 for (OutPort op : outPorts.value()) {
-                    if (op.arrayPort() && op.value().equals(source.getPort()))
-                        source.port = getArrOutPortName(srcLabel, source);
+                    if (op.arrayPort() && op.value().equals(sourcePort))
+                        sourcePort = getArrOutPortName(srcLabel, source);
                 }
 
             } else if (outPort != null && outPort.arrayPort()) {
-                source.port = getArrOutPortName(srcLabel, source);
+                sourcePort = getArrOutPortName(srcLabel, source);
             }
 
             if (arrIdx != -1) {
-                String s = String.format("\tconnect(component(\"%s\"), port(\"%s\",%d),component(\"%s\"), port(\"%s\"));\n"
-                        , srcLabel, arrOutportName, arrIdx, targetLabel, target.port);
-                conns.add(s);
+                codeString = String.format("connect(component(\"%s\"), port(\"%s\",%d),component(\"%s\"), port(\"%s\"));"
+                        , srcLabel, arrOutportName, arrIdx, targetLabel, targetPort);
+                conns.add(codeString);
             } else {
-                String s = String.format("\tconnect(\"%s.%s\",\"%s.%s\");\n", srcLabel, source.port, targetLabel, target.port);
-                conns.add(s);
+                codeString = String.format("connect(\"%s.%s\",\"%s.%s\");", srcLabel, sourcePort, targetLabel, targetPort);
+                conns.add(codeString);
 
             }
             arrIdx = -1;
+//            codeString = String.format("connect(\"%s.%s\",\"%s.%s\");", srcLabel, sourcePort, targetLabel, targetPort);
+//            conns.add(codeString);
 
         }
         return conns
     }
+
 
     List<String> genIips() {
         if (params != null) {
@@ -170,7 +243,7 @@ class FbpScriptGenerator {
 
             if (hasDateTimeInPort(cls, obj.getString("port"))) {
                 dt = formatter.parseDateTime((String) value);
-                iip = String.format("\tinitialize(\"%s\",component(\"%s\"),port(\"%s\"));\n", String.valueOf(dt), comp, prt);
+                iip = String.format("initialize(\"%s\",component(\"%s\"),port(\"%s\"));", String.valueOf(dt), comp, prt);
             } else {
                 //initialize(value,component(comp),port(prt));
                 String sValue;
@@ -179,9 +252,14 @@ class FbpScriptGenerator {
                 } else {
                     sValue = String.valueOf(value);
                 }
-                iip = String.format("\tinitialize(%s,component(\"%s\"),port(\"%s\"));\n", sValue, comp, prt);
+                iip = String.format("initialize(%s,component(\"%s\"),port(\"%s\"));", sValue, comp, prt);
             }
             iips.add(iip);
+
+            if (isSubnet) {
+
+            }
+
         }
         return iips
     }
