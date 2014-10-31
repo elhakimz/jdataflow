@@ -1,43 +1,40 @@
 <div>
-    <h3>Edit Datas</h3>
-
     <div class="panel panel-default">
         <div class="panel-body">
             <form id="edit_form" class="form-horizontal"></form>
         </div>
     </div>
-
-    <div id='editor_holder'></div>
-
-
     <script type="text/javascript">
         $('#edit_form').jsonForm({
             schema: {
-        <#list model.fielddefs as fielddef>
-        ${fielddef.name}:
+        <#list model.metadata as meta>
+        ${meta.name}:
         {
-            type: '${fielddef.type}',
+            type: '${meta.type}',
                     title
         :
-            '${fielddef.title}',
+            '${meta.title}',
                     required
-        : ${fielddef.required}
+        :
+            '${meta.required?c}'
         }
         ,
         </#list>
         },
-        onSubmit: function (errors, values) {
-            if (errors) {
-                $('#res').html('<p>I beg your pardon?</p>');
-            }
-            else {
-                $('#res').html('<p>Hello ' + values.name + '.' +
-                        (values.age ? '<br/>You are ' + values.age + '.' : '') +
-                        '</p>');
-            }
+        "params"
+        :
+        {
+            "fieldHtmlClass"
+        :
+            "form-control"
         }
         })
         ;
+        $('.control-label').addClass('col-lg-2');
+        $('.control-group').addClass('form-group');
+        $('.controls').addClass('col-lg-10');
+        $('.control-label').css('white-space', 'nowrap');
+        $('.control-label').css('text-align', 'left');
     </script>
 
 </div>

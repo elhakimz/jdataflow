@@ -8,7 +8,7 @@
             "javaType": "org.javafbp.runtime.components.db.SqlSysConnection",
             "description": "",
             "x": 216,
-            "y": 156,
+            "y": 164,
             "state": {},
             "w": 200,
             "h": 75
@@ -16,7 +16,7 @@
         {
             "id": 2,
             "color": "hsl(120, 68%, 70%)",
-            "label": "SqlQuery2",
+            "label": "SHOW-TABLES",
             "type": "db.SqlQuery",
             "javaType": "org.javafbp.runtime.components.db.SqlQuery",
             "description": "",
@@ -29,22 +29,24 @@
             "h": 225
         },
         {
-            "id": 7,
+            "id": 10,
             "color": "hsl(219, 16%, 76%)",
-            "label": "WriteToConsole7",
-            "type": "core.WriteToConsole",
-            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+            "label": "EDIT_TEMPLATE",
+            "type": "core.Passthru",
+            "javaType": "com.jpmorrsn.fbp.components.Passthru",
             "description": "",
-            "x": 1355,
-            "y": 307,
-            "state": {},
+            "x": 778.0000000000001,
+            "y": 375.5,
+            "state": {
+                "IN": "/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/edit.html.ftl"
+            },
             "w": 200,
             "h": 75
         },
         {
             "id": 5,
             "color": "",
-            "label": "SplitStream5",
+            "label": "SPLIT-DATA",
             "type": "flow.SplitStream",
             "javaType": "org.javafbp.runtime.components.flow.SplitStream",
             "description": "",
@@ -57,12 +59,12 @@
         {
             "id": 6,
             "color": "hsl(270, 68%, 70%)",
-            "label": "CreateBackMenuPage6",
+            "label": "MENU-PAGE",
             "type": "zen.CreateBackMenuPage",
             "javaType": "org.javafbp.runtime.components.zen.CreateBackMenuPage",
             "description": "",
             "x": 1043,
-            "y": 307,
+            "y": 342,
             "state": {
                 "TMPLFILE": "/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/menu.html.ftl",
                 "TARGETDIR": "/Users/abilhakim/github/jdataflow/web/backend"
@@ -73,19 +75,34 @@
         {
             "id": 3,
             "color": "hsl(270, 68%, 70%)",
-            "label": "CreateBackBrowsePage3",
+            "label": "BROWSER-PAGES",
             "type": "zen.CreateBackBrowsePage",
             "javaType": "org.javafbp.runtime.components.zen.CreateBackBrowsePage",
             "description": "",
             "x": 1050,
-            "y": 50,
+            "y": -3,
             "state": {
-                "TMPLFILE": "/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/menu.html.ftl",
+                "TMPLFILE": "/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/browse.html.ftl",
                 "WITHDATA": true,
                 "TARGETDIR": "/Users/abilhakim/github/jdataflow/web/backend"
             },
             "w": 200,
             "h": 300
+        },
+        {
+            "id": 8,
+            "color": "hsl(270, 68%, 70%)",
+            "label": "EDIT-PAGES",
+            "type": "zen.CreateBackEditPage",
+            "javaType": "org.javafbp.runtime.components.zen.CreateBackEditPage",
+            "description": "",
+            "x": 1054,
+            "y": 163,
+            "state": {
+                "TARGETDIR": "/Users/abilhakim/github/jdataflow/web/backend"
+            },
+            "w": 200,
+            "h": 225
         },
         {
             "id": 4,
@@ -94,8 +111,34 @@
             "type": "core.WriteToConsole",
             "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
             "description": "",
-            "x": 1335,
-            "y": 48,
+            "x": 1338,
+            "y": -1,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 9,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "WriteToConsole9",
+            "type": "core.WriteToConsole",
+            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+            "description": "",
+            "x": 1339,
+            "y": 166,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 7,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "WriteToConsole7",
+            "type": "core.WriteToConsole",
+            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+            "description": "",
+            "x": 1355,
+            "y": 346,
             "state": {},
             "w": 200,
             "h": 75
@@ -165,6 +208,39 @@
             "target": {
                 "node": 7,
                 "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 5,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 8,
+                "port": "TABLE"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 8,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 9,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 10,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 8,
+                "port": "TEMPLFILE"
             },
             "route": 4
         }

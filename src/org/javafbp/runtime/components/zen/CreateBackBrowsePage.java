@@ -72,7 +72,7 @@ public class CreateBackBrowsePage extends Component {
         Template temp = Settings.getInstance().getFreeMarkerConfig().getTemplate(ss);
 
         for (int i = 0; i < tables.length(); i++) {
-            Map<String, List> map = query(String.valueOf(tables.get(i)));
+            Map<String, Object> map = query(String.valueOf(tables.get(i)));
 
             Map<String, Map> objectMap = new HashMap<>();
             objectMap.put("model", map);
@@ -117,14 +117,14 @@ public class CreateBackBrowsePage extends Component {
      * @param table
      * @return
      */
-    private Map<String, List> query(String table) {
+    private Map<String, Object> query(String table) {
         StringBuilder sb = new StringBuilder();
         if (!withData) {
             sb.append("SELECT * FROM ").append(table).append(" LIMIT 1");
         } else {
             sb.append("SELECT * FROM ").append(table);
         }
-        Map<String, List> map = new LinkedHashMap<>();
+        Map<String, Object> map = new LinkedHashMap<>();
         try {
             List<List> datas = new ArrayList<>();
             List<Map> metas = new ArrayList<>();
@@ -162,6 +162,11 @@ public class CreateBackBrowsePage extends Component {
                 }
             }
             connection.close();
+            Map<String, Object> config = new HashMap<>();
+            config.put("table", table);
+            config.put("idcolumn", "id");
+
+            map.put("config", config);
             map.put("data", datas);
             map.put("metadata", metas);
             return map;
