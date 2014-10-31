@@ -17,7 +17,9 @@ import java.sql.*;
  *         Date: 9/22/14.
  */
 @ComponentDescription("Query database, CONN is connection, QUERY is query string, OUT is output in JSON format")
-@InPorts({@InPort(value = "CONN", type = Connection.class), @InPort(value = "QUERY", description = "SQL select query")})
+@InPorts({@InPort(value = "CONN", type = Connection.class)
+        , @InPort(value = "QUERY", description = "SQL select query")
+        , @InPort(value = "KEYED", description = "Keyed Result", type = Boolean.class, optional = true)})
 @OutPorts({@OutPort(value = "OUT", description = "Query result in JSON string")
         , @OutPort(value = "METADATA", description = "Resultset Metadata in JSON", optional = true)
         , @OutPort(value = "CONN", type = Connection.class, optional = true, description = "Connection object")})
@@ -25,14 +27,22 @@ import java.sql.*;
 public class SqlQuery extends Component {
     InputPort inConn;
     InputPort inQuery;
+    InputPort inKeyed;
+
     OutputPort outOut;
     OutputPort outConn;
     OutputPort outMeta;
+    boolean keyed = false;
 
     @Override
     protected void execute() throws Exception {
         Packet p = inConn.receive();
         Packet p2 = inQuery.receive();
+        Packet p3;
+        if ((p3 = inKeyed.receive()) != null) {
+            keyed = (Boolean) p3.getContent();
+        }
+
 
         String qry = (String) p2.getContent();
         Connection connection = (Connection) p.getContent();
@@ -48,10 +58,23 @@ public class SqlQuery extends Component {
 
                 while (rs.next()) {
                     JSONObject jsonObject = new JSONObject();
-                    for (int i = 1; i <= rsm.getColumnCount(); i++) {
-                        jsonObject.put(rsm.getColumnName(i), rs.getObject(i));
+                    JSONArray arr;
+                    arr = new JSONArray();
+                    int colcount = rsm.getColumnCount();
+                    Object val = new Object();
+
+                    for (int i = 1; i <= colcount; i++) {
+
+                        if (keyed) {
+                            jsonObject.put(rsm.getColumnName(i), rs.getObject(i));
+                        } else {
+                            if (colcount > 1) arr.put(rs.getObject(i));
+                            else val = rs.getObject(i);
+                        }
+
                         if (metacollect && outMeta.isConnected()) {
                             JSONObject metaData = new JSONObject();
+                            metaData.put("name", rsm.getColumnName(i));
                             metaData.put("column", rsm.getColumnName(i));
                             metaData.put("type", rsm.getColumnTypeName(i));
                             metaData.put("scale", rsm.getScale(i));
@@ -62,7 +85,13 @@ public class SqlQuery extends Component {
                         }
                     }
                     metacollect = false;
-                    datas.put(jsonObject);
+
+                    if (keyed) {
+                        datas.put(jsonObject);
+                    } else {
+                        if (colcount > 1) datas.put(arr);
+                        else datas.put(val);
+                    }
                 }
             }
 
@@ -74,9 +103,16 @@ public class SqlQuery extends Component {
             datas.put(err);
         }
         outOut.send(create(datas.toString(1)));
-        outConn.send(p);
+
         if (outMeta.isConnected()) {
             outMeta.send(create(metas.toString(1)));
+        }
+
+        if (outConn.isConnected()) {
+            outConn.send(p);
+        } else {
+            connection.close();
+            drop(p);
         }
         drop(p2);
         // drop(p);
@@ -89,6 +125,7 @@ public class SqlQuery extends Component {
     protected void openPorts() {
         inConn = openInput("CONN");
         inQuery = openInput("QUERY");
+        inKeyed = openInput("KEYED");
         outOut = openOutput("OUT");
         outConn = openOutput("CONN");
         outMeta = openOutput("METADATA");

@@ -11,11 +11,10 @@ import com.jpmorrsn.fbp.engine.*;
 
 /**
  * Affix each packet IN with the given Strings PRE before and POST after, and copy it to OUT.
- *
  */
 @ComponentDescription("For each packet IN add the Strings PRE as a prefix and POST as a suffix, and copy to OUT")
 @OutPort("OUT")
-@InPorts({ @InPort("IN"), @InPort("PRE"), @InPort("POST") })
+@InPorts({@InPort("IN"), @InPort("PRE"), @InPort("POST")})
 public class StringAffix extends Component {
 
     static final String copyright = "Copyright 2007, 2010, 2012, J. Paul Morrison.  At your option, you may copy, "
@@ -34,7 +33,7 @@ public class StringAffix extends Component {
         String spre = ""; // Empty string if null
         Packet pre = preport.receive();
         if (pre != null) {
-            spre = (String) pre.getContent();
+            spre = String.valueOf(pre.getContent());
             drop(pre);
         }
         //preport.close();
@@ -42,19 +41,20 @@ public class StringAffix extends Component {
         String spost = ""; // Empty string if null
         Packet post = postport.receive();
         if (post != null) {
-            spost = (String) post.getContent();
+            spost = String.valueOf(post.getContent());
             drop(post);
         }
         //postport.close();
 
 
-      //  while ((pin = inport.receive()) != null) {
-            String sout = spre + (String) pin.getContent() + spost;
-            System.out.println("sout = " + sout);
-            outport.send(create(sout));
-            drop(pin); // did you hear that?
+        //  while ((pin = inport.receive()) != null) {
+        String sout = spre + String.valueOf(pin.getContent()) + spost;
+        System.out.println("sout = " + sout);
+        outport.send(create(sout));
 
-     //   }
+        if (pin != null) drop(pin); // did you hear that?
+
+        //   }
     }
 
     @Override

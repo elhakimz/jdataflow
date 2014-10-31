@@ -35,14 +35,14 @@ public class FbpJsonToModel {
         nodes = json.getJSONArray("nodes");
         edges = json.getJSONArray("edges");
 
-        System.out.println("nodes.length = " + nodes.length());
+        //System.out.println("nodes.length = " + nodes.length());
 
         List<JSONObject> lst = new ArrayList<>();
 
         for (int i = 0; i < nodes.length(); i++) {
             JSONObject obj = nodes.getJSONObject(i);
             lst.add(obj);
-            System.out.println("obj.get(\"label\") = " + obj.get("label"));
+            //System.out.println("obj.get(\"label\") = " + obj.get("label"));
         }
 
         for (JSONObject jso : lst) {
@@ -57,7 +57,7 @@ public class FbpJsonToModel {
             lstEdge.add(obj);
         }
 
-        System.out.println("lstEdge = " + lstEdge);
+        //System.out.println("lstEdge = " + lstEdge);
 
         for (JSONObject jso : lstEdge) {
             graphModel.addEdge(convertEdges(jso));

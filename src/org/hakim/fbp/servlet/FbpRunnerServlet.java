@@ -82,7 +82,7 @@ public class FbpRunnerServlet extends HttpServlet {
     }
 
     private String getInitialParam(Object data) throws Exception {
-        System.out.println("getting initial parameter..");
+        // System.out.println("getting initial parameter..");
         Map<String, Object> flds = new LinkedHashMap<>();
         FbpJsonToModel jsonToModel = new FbpJsonToModel();
         FbpGraphModel graphModel = jsonToModel.convert(data);

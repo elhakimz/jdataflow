@@ -8,7 +8,9 @@ import com.jpmorrsn.fbp.engine.*;
  * @author abilhakim
  *         Date: 10/3/14.
  */
-/** Component to split an input stream into multiple output streams,
+
+/**
+ * Component to split an input stream into multiple output streams,
  * where the first 30 packets go to the first output port, the next 30 go
  * to the second and so on.  Each output stream is closed before data starts
  * being sent to the next.  This component was used for testing deadlock behaviour.
@@ -35,8 +37,9 @@ public class SplitStream extends Component {
         Object o = p.getContent();
 
         for (OutputPort anOutportArray : outportArray) {
-                        anOutportArray.send(create(o));
+            anOutportArray.send(create(o));
         }
+
         drop(p);
 
     }

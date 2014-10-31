@@ -66,7 +66,7 @@ class FbpScriptGenerator {
         for (FbpNodeModel node : nodeModels) {
 
             nodeModelMap[node.id] = node;
-            println "registering node name= ${nodeModelMap[node.id].label}, ${nodeModelMap[node.id].id}"
+            //println "registering node name= ${nodeModelMap[node.id].label}, ${nodeModelMap[node.id].id}"
             if (!node.getClassType().empty) {
                 cls = Class.forName(node.classType)
 
@@ -105,7 +105,7 @@ class FbpScriptGenerator {
     List<String> genConnections() {
         def conns = []
         List<FbpEdgeModel> edges = graphModel.edges
-        println "connecting ${edges.size()} edges"
+        //println "connecting ${edges.size()} edges"
         for (FbpEdgeModel edge : edges) {
             FbpEdgeModel.FbpNodePort source = edge.source;
             FbpEdgeModel.FbpNodePort target = edge.target;
@@ -133,7 +133,7 @@ class FbpScriptGenerator {
 
             String targetLabel = (tgtNode != null ? tgtNode.label : '*')
             if (targetLabel == '*') {
-                println "failed target id for labeling=" + tgtId
+                //println "failed target id for labeling=" + tgtId
             }
 //            if(!tgtNode){
 //                println "STRUCTURE FAIL: tgtNode id=null =>" + tgtId+" issubnet= "+isSubnet

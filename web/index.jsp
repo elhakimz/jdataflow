@@ -12,18 +12,18 @@
     <script src="libs/jquery-2.1.1.min.js"></script>
     <script src="libs/modernizr-latest.js"></script>
     <script src="libs/jquery.json-2.2.min.js"></script>
-    <script src="libs/loadie.js"></script>
 
-    <link rel="stylesheet" href="themes/default/font-proximanova.css" />
-    <link rel="stylesheet" href="themes/default/font-awesome.css" />
-    <link rel="stylesheet" href="themes/default/dataflow.css" />
-    <link rel="stylesheet" href="themes/default/modules/node.css" />
-    <link rel="stylesheet" href="themes/default/modules/edge.css" />
-    <link rel="stylesheet" href="themes/default/modules/port.css" />
-    <link rel="stylesheet" href="themes/default/modules/card.css" />
-    <link rel="stylesheet" href="themes/default/modules/jqui.css" />
-    <link rel="stylesheet" href="themes/default/modules/search.css" />
-    <link rel="stylesheet" href="libs/custom.css" />
+
+    <link rel="stylesheet" href="themes/default/font-proximanova.css"/>
+    <link rel="stylesheet" href="themes/default/font-awesome.css"/>
+    <link rel="stylesheet" href="themes/default/dataflow.css"/>
+    <link rel="stylesheet" href="themes/default/modules/node.css"/>
+    <link rel="stylesheet" href="themes/default/modules/edge.css"/>
+    <link rel="stylesheet" href="themes/default/modules/port.css"/>
+    <link rel="stylesheet" href="themes/default/modules/card.css"/>
+    <link rel="stylesheet" href="themes/default/modules/jqui.css"/>
+    <link rel="stylesheet" href="themes/default/modules/search.css"/>
+    <link rel="stylesheet" href="libs/custom.css"/>
     <link href="themes/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="libs/pnotify.custom.min.css"/>
     <link href="libs/treeview/bootstrap-treeview.css" rel="stylesheet">
@@ -32,7 +32,7 @@
 
 <body>
 <!-- Third-Party Libraries -->
-<script>$('body').loadie(10); </script>
+
 <script src="libs/jquery-ui-1.11.1/jquery-ui.js"></script>
 <%--<link href="libs/jquery-ui-1.11.1/jquery-ui.css" rel="stylesheet">--%>
 <script type="application/javascript" src="themes/bootstrap.js"></script>
@@ -87,7 +87,7 @@
 <script src="src/plugins/open-save.js"></script>
 <script src="src/plugins/run-graph.js"></script>
 
-<script>$('body').loadie(20); </script>
+
 <!-- Nodes (some basics to extend) -->
 <script src="src/nodes/base.js"></script>
 <script src="src/nodes/base-resizable.js"></script>
@@ -99,7 +99,7 @@
 <script src="src/nodes/dataflow-input.js"></script>
 <script src="src/nodes/dataflow-output.js"></script>
 <!-- components, can be generated from servlet -->
-<script>$('body').loadie(30); </script>
+
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("com.jpmorrsn.fbp.components")%>
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("com.jpmorrsn.fbp.text")%>
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("com.jpmorrsn.fbp.examples.components")%>
@@ -112,12 +112,12 @@
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("org.javafbp.runtime.components.net")%>
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("org.javafbp.runtime.components.zen")%>
 <%= FbpCompJsBuilder.getInstance().getFbpCompScriptList("org.javafbp.runtime.components.io")%>
-<script>$('body').loadie(60); </script>
+
 <script src="libs/ace/ace.js"></script>
 <script src="libs/ace/theme-eclipse.js"></script>
 <script src="libs/ace/theme-solarized_dark.js"></script>
 <script src="libs/ace/theme-twilight.js"></script>
-<script>$('body').loadie(70); </script>
+
 <script src="libs/ace/mode-groovy.js"></script>
 <script src="libs/ace/mode-javascript.js"></script>
 <script src="libs/ace/mode-sql.js"></script>
@@ -172,10 +172,9 @@
                         }
                     ]
                 }
-
         );
         g.trigger("change");
-        $.dform.addType("xbutton", function(options) {
+        $.dform.addType("xbutton", function (options) {
             // Return a new button element that has all options that
             // don't have a registered subscriber as attributes
             return $("<button>").dform('attr', options).button();
@@ -185,7 +184,7 @@
     });
 
 </script>
-<script>$('body').loadie(100); </script>
+
 <div id="dlg" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">

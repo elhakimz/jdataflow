@@ -38,7 +38,7 @@ public class SysDataSource {
             config.setPassword(Settings.SYS_DB_PASSWORD);
             config.setMinConnectionsPerPartition(5);
             config.setMaxConnectionsPerPartition(10);
-            config.setPartitionCount(1);
+            config.setPartitionCount(3);
             // setup the connection pool
             connectionPool = new BoneCP(config);
         } catch (Exception e) {

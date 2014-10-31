@@ -1,4 +1,4 @@
-package org.javafbp.runtime.components.base
+package org.javafbp.runtime.components.flow
 
 import com.jpmorrsn.fbp.engine.*
 import org.json.JSONArray
@@ -13,7 +13,7 @@ import org.json.JSONArray
 @ComponentDescription("Collect streams then continue it to outport")
 @InPort("IN")
 @OutPort("OUT")
-class StackStreams extends Component {
+class MergeStream extends Component {
 
     private InputPort inport;
     private OutputPort outport;
@@ -38,7 +38,7 @@ class StackStreams extends Component {
             for (Object obj : list) {
                 jsonArray.put(obj)
             }
-            outport.send(create(jsonArray))
+            outport.send(create(jsonArray.toString(1)))
             drop(p);
         }
     }

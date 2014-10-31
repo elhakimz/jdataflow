@@ -1,13 +1,6 @@
 package org.javafbp.runtime.components.io
 
-import com.jpmorrsn.fbp.engine.Component
-import com.jpmorrsn.fbp.engine.ComponentDescription
-import com.jpmorrsn.fbp.engine.InPort
-import com.jpmorrsn.fbp.engine.InPorts
-import com.jpmorrsn.fbp.engine.InputPort
-import com.jpmorrsn.fbp.engine.OutPort
-import com.jpmorrsn.fbp.engine.OutputPort
-import com.jpmorrsn.fbp.engine.Packet
+import com.jpmorrsn.fbp.engine.*
 
 /**
  * Purpose:
@@ -16,11 +9,11 @@ import com.jpmorrsn.fbp.engine.Packet
  */
 @ComponentDescription("Writes a stream of packets to an I/O file")
 @InPorts([
-    @InPort(value = "IN", description = "Packets to be written", type = String.class),
-    @InPort(value = "DESTINATION", description = "File name and optional format, separated by a comma", type = String.class) ])
+        @InPort(value = "IN", description = "Packets to be written", type = String.class),
+        @InPort(value = "DESTINATION", description = "File name and optional format, separated by a comma", type = String.class)])
 // filename [, format ]
 @OutPort(value = "OUT", optional = true, description = "Output port, if connected", type = String.class)
-class CreateTextFile extends Component{
+class CreateTextFile extends Component {
     private InputPort inport;
 
     private InputPort destination;
@@ -41,6 +34,8 @@ class CreateTextFile extends Component{
         new File(dest).write(content)
         outport.send(create(content))
 
+        inport.close()
+        destination.close()
         drop(p1)
         drop(p2)
 

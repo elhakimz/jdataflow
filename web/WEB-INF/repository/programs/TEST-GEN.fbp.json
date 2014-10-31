@@ -1,0 +1,172 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "SqlSysConnection1",
+            "type": "db.SqlSysConnection",
+            "javaType": "org.javafbp.runtime.components.db.SqlSysConnection",
+            "description": "",
+            "x": 216,
+            "y": 156,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 2,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "SqlQuery2",
+            "type": "db.SqlQuery",
+            "javaType": "org.javafbp.runtime.components.db.SqlQuery",
+            "description": "",
+            "x": 493,
+            "y": 165,
+            "state": {
+                "QUERY": "show tables;"
+            },
+            "w": 200,
+            "h": 225
+        },
+        {
+            "id": 7,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "WriteToConsole7",
+            "type": "core.WriteToConsole",
+            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+            "description": "",
+            "x": 1355,
+            "y": 307,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 5,
+            "color": "",
+            "label": "SplitStream5",
+            "type": "flow.SplitStream",
+            "javaType": "org.javafbp.runtime.components.flow.SplitStream",
+            "description": "",
+            "x": 729,
+            "y": 182,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 6,
+            "color": "hsl(270, 68%, 70%)",
+            "label": "CreateBackMenuPage6",
+            "type": "zen.CreateBackMenuPage",
+            "javaType": "org.javafbp.runtime.components.zen.CreateBackMenuPage",
+            "description": "",
+            "x": 1043,
+            "y": 307,
+            "state": {
+                "TMPLFILE": "/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/menu.html.ftl",
+                "TARGETDIR": "/Users/abilhakim/github/jdataflow/web/backend"
+            },
+            "w": 200,
+            "h": 225
+        },
+        {
+            "id": 3,
+            "color": "hsl(270, 68%, 70%)",
+            "label": "CreateBackBrowsePage3",
+            "type": "zen.CreateBackBrowsePage",
+            "javaType": "org.javafbp.runtime.components.zen.CreateBackBrowsePage",
+            "description": "",
+            "x": 1050,
+            "y": 50,
+            "state": {
+                "TMPLFILE": "/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/menu.html.ftl",
+                "WITHDATA": true,
+                "TARGETDIR": "/Users/abilhakim/github/jdataflow/web/backend"
+            },
+            "w": 200,
+            "h": 300
+        },
+        {
+            "id": 4,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "WriteToConsole4",
+            "type": "core.WriteToConsole",
+            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+            "description": "",
+            "x": 1335,
+            "y": 48,
+            "state": {},
+            "w": 200,
+            "h": 75
+        }
+    ],
+    "edges": [
+        {
+            "source": {
+                "node": 1,
+                "port": "CONNS"
+            },
+            "target": {
+                "node": 2,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 3,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 4,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 2,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 5,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 5,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 3,
+                "port": "TABLE"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 5,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 6,
+                "port": "TABLE"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 6,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 7,
+                "port": "IN"
+            },
+            "route": 4
+        }
+    ]
+}
