@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="themes/default/font-proximanova.css"/>
     <link rel="stylesheet" href="themes/default/font-awesome.css"/>
+    <link href="themes/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="themes/default/dataflow.css"/>
     <link rel="stylesheet" href="themes/default/modules/node.css"/>
     <link rel="stylesheet" href="themes/default/modules/edge.css"/>
@@ -24,7 +25,7 @@
     <link rel="stylesheet" href="themes/default/modules/jqui.css"/>
     <link rel="stylesheet" href="themes/default/modules/search.css"/>
     <link rel="stylesheet" href="libs/custom.css"/>
-    <link href="themes/bootstrap.min.css" rel="stylesheet"/>
+
     <link rel="stylesheet" href="libs/pnotify.custom.min.css"/>
     <link href="libs/treeview/bootstrap-treeview.css" rel="stylesheet">
 

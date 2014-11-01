@@ -9,6 +9,7 @@
     <script src="../libs/modernizr-latest.js"></script>
     <script src="../libs/jquery.json-2.2.min.js"></script>
     <link href="../themes/sbadmin/bootstrap.css" rel="stylesheet"/>
+    <link href="../themes/sbadmin/sb-admin-2.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../libs/pnotify.custom.min.css"/>
     <link rel="stylesheet" href="../libs/jasny-bootstrap/css/jasny-bootstrap.min.css"/>
     <link rel="stylesheet" href="../libs/jasny-bootstrap/css/navmenu.css"/>
@@ -47,11 +48,15 @@
 <script type="application/javascript" src="../libs/pnotify.custom.min.js"></script>
 <script type="application/javascript" src="../libs/datatables/jquery.dataTables.min.js"></script>
 <script type="application/javascript" src="../libs/datatables/dataTables.bootstrap.js"></script>
-<script type="application/javascript" src="../libs/jsonform/underscore.js"></script>
-<script type="application/javascript" src="../libs/jsonform/jsv.js"></script>
-<script type="application/javascript" src="../libs/jsonform/jsonform.js"></script>
+<script type="application/javascript" src="../libs/jsoneditor.min.js"></script>
 
 <script>
+    JSONEditor.defaults.options.theme = 'bootstrap3';
+    JSONEditor.defaults.options.disable_edit_json = true;
+    JSONEditor.defaults.options.disable_properties = true;
+    JSONEditor.defaults.options.disable_collapse = true;
+    JSONEditor.defaults.options.form_name_root = "";
+
 
     function updateContent(page) {
         $.ajax(page).done(function (data) {

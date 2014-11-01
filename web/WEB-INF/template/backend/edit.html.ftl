@@ -1,12 +1,17 @@
 <div>
     <div class="panel panel-default">
         <div class="panel-body">
-            <form id="edit_form" class="form-horizontal"></form>
+            <small>
+                <form id="edit_form" class="form-horizontal"></form>
+            </small>
         </div>
     </div>
     <script type="text/javascript">
-        $('#edit_form').jsonForm({
+        var element = document.getElementById('edit_form');
+        var editor = new JSONEditor(element, {
             schema: {
+                type: "object",
+                properties: {
         <#list model.metadata as meta>
         ${meta.name}:
         {
@@ -28,13 +33,15 @@
         :
             "form-control"
         }
+        }
         })
         ;
-        $('.control-label').addClass('col-lg-2');
-        $('.control-group').addClass('form-group');
-        $('.controls').addClass('col-lg-10');
-        $('.control-label').css('white-space', 'nowrap');
-        $('.control-label').css('text-align', 'left');
+        $('.row').removeClass('row');
+        //        $('.control-label').addClass('col-lg-2');
+        //        $('.control-group').addClass('form-group');
+        //        $('.controls').addClass('col-lg-10');
+        //        $('.control-label').css('white-space', 'nowrap');
+        //        $('.control-label').css('text-align', 'left');
     </script>
 
 </div>

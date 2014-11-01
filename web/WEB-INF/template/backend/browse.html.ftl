@@ -23,6 +23,13 @@
             { "title": "${meta.name}" },
         </#list>
 
+        ],
+        "columnDefs": [
+            {
+                "targets": -1,
+                "data": null,
+                "defaultContent": '<button class="btn btn-sm" onclick="clickedit()">Edit</button>'
+            }
         ]
     });
 
@@ -36,11 +43,20 @@
         }
     });
 
+    function clickedit() {
+//        var data = table.row( $(this).parents('tr') ).data();
+//        alert( data[0] +"'s salary is: "+ data[ 5 ] );
+//        var id=  data[0];
+        var title = "${model.config.table}";
+        var page = title + "_edit.html";
+        showEdit(page, title);
+    }
+    ;
+
     $('#button').click(function () {
         //table.row('.selected').remove().draw( false );
         var title = "${model.config.table}";
         var page = title + "_edit.html";
-
         showEdit(page, title);
     });
 

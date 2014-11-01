@@ -23,6 +23,7 @@ public class DbUtil {
     public static String getJsDataType(String dbType) {
         String type = dbType.toUpperCase().trim();
         switch (type) {
+            case "CHAR":
             case "VARCHAR2":
             case "VARCHAR":
                 return "string";
@@ -36,7 +37,7 @@ public class DbUtil {
             case "FLOAT":
                 return "number";
             default:
-                return "object";
+                return "string";
         }
     }
 

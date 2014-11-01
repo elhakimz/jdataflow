@@ -19,7 +19,7 @@ class FbpService {
     String list() {
         println("Calling list()");
         List<String> results = new ArrayList<>();
-        File[] files = new File(Settings.SYS_APP_DIR+"/WEB-INF/repository/fbp/").listFiles();
+        File[] files = new File(Settings.SYS_APP_DIR + "/WEB-INF/repository/fbp/").listFiles();
         println("files = " + files);
         assert files != null;
         for (File file : files) {
@@ -34,18 +34,18 @@ class FbpService {
     @GET
     @Path("get/{file}")
     @Produces("text/plain")
-    String getFile(@PathParam("file")String fileName) {
-       String fname= fileName.replace('|','/');
-       System.out.println("fname = " + fname);
-       String fileContents = new File(fname).getText('UTF-8')
-       return fileContents;
+    String getFile(@PathParam("file") String fileName) {
+        String fname = fileName.replace('|', '/');
+        System.out.println("fname = " + fname);
+        String fileContents = new File(fname).getText('UTF-8')
+        return fileContents;
     }
 
 
     @GET
     @Path("run/{file}")
     @Produces("application/json")
-    String runFbpJsonFile(@PathParam("file")String fileName){
+    String runFbpJsonFile(@PathParam("file") String fileName) {
 
         return ""
     }
@@ -53,7 +53,7 @@ class FbpService {
     @GET
     @Path("gen/{file}")
     @Produces("application/json")
-    String genFbpJava(@PathParam("file")String fileName){
+    String genFbpJava(@PathParam("file") String fileName) {
 
 
         return ""
@@ -63,18 +63,18 @@ class FbpService {
     @POST
     @Path("save/{file}/{content}")
     @Produces("application/json")
-    String saveFbp(@PathParam("file")String fileName,@PathParam("content") String content){
+    String saveFbp(@PathParam("file") String fileName, @PathParam("content") String content) {
 
-       String fname="";
-       if(fileName.contains("/")){
-           fname= fileName.replace('|','/');
-       }
+        String fname = "";
+        if (fileName.contains("/")) {
+            fname = fileName.replace('|', '/');
+        }
 
-       if(!fname.endsWith(".json"))  fname+".json"
+        if (!fname.endsWith(".json")) fname + ".json"
 
-       if(!fname.startsWith(Settings.SYS_APP_DIR)){
-         fname = Settings.SYS_APP_DIR+Settings.SYS_REPOSITORY_DIR+"/programs/"+fileName
-       }
+        if (!fname.startsWith(Settings.SYS_APP_DIR)) {
+            fname = Settings.SYS_APP_DIR + Settings.SYS_REPOSITORY_DIR + "/programs/" + fileName
+        }
 
         System.out.println("fname = " + fname);
 
@@ -96,10 +96,9 @@ class FbpService {
     @Produces("application/json")
     public String listTree() {
         System.out.println("Calling TemplaterService.list()");
-        String json =Util.getJsonFileTree(Settings.SYS_APP_DIR+Settings.SYS_REPOSITORY_DIR);
+        String json = Util.getJsonFileTree(Settings.SYS_APP_DIR + Settings.SYS_REPOSITORY_DIR);
         return json;
     }
-
 
 
 }
