@@ -15,7 +15,7 @@ import org.json.JSONObject;
 @InPorts({@InPort(value = "IN", type = String.class, description = "JSON Array string")
         , @InPort(value = "INDEX", type = Integer.class, description = "Index of JSON")})
 @OutPort(value = "OUT", type = String.class)
-public class GetJsonByIndex extends Component {
+public class GetByIndex extends Component {
     InputPort inIn;
     InputPort inIndex;
     OutputPort outOut;

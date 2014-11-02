@@ -10,27 +10,27 @@ import com.jpmorrsn.fbp.engine.*;
  *         Date: 10/2/14.
  */
 @ComponentDescription("Convert Object to JSON String")
-@InPorts({@InPort(value="IN", type = Object.class, description = "object input")})
+@InPorts({@InPort(value = "IN", type = Object.class, description = "object input")})
 @OutPort("OUT")
-public class ObjectToJson extends Component {
+public class ToJson extends Component {
     InputPort inIn;
     OutputPort outOut;
 
     @Override
     protected void execute() throws Exception {
-      Packet inP=inIn.receive();
-      Gson gson = new Gson();
-      String s = gson.toJson(inP.getContent());
+        Packet inP = inIn.receive();
+        Gson gson = new Gson();
+        String s = gson.toJson(inP.getContent());
 
-      outOut.send(create(s));
-      inIn.close();
-      drop(inP);
+        outOut.send(create(s));
+        inIn.close();
+        drop(inP);
 
     }
 
     @Override
     protected void openPorts() {
-      inIn=openInput("IN");
-      outOut=openOutput("OUT");
+        inIn = openInput("IN");
+        outOut = openOutput("OUT");
     }
 }

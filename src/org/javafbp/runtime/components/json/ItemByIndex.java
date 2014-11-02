@@ -14,7 +14,7 @@ import org.json.JSONException;
 @InPorts({@InPort(value = "IN", type = String.class, description = "JSON Array string")
         , @InPort(value = "INDEX", type = Integer.class, description = "Index of JSON")})
 @OutPort(value = "OUT", type = String.class)
-public class GetItemByIndex extends Component {
+public class ItemByIndex extends Component {
     InputPort inIn;
     InputPort inIndex;
     OutputPort outOut;

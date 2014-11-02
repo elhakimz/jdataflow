@@ -11,7 +11,7 @@ import org.json.JSONObject
 @ComponentDescription("Get Json IN by KEY, returns Json String object")
 @InPorts([@InPort("IN"), @InPort("KEY")])
 @OutPort("OUT")
-class GetJsonByKey extends Component {
+class GetByKey extends Component {
 
     InputPort inIn
     InputPort inKey
@@ -34,8 +34,8 @@ class GetJsonByKey extends Component {
 
     @Override
     protected void openPorts() {
-      inIn = openInput("IN")
-      inKey=openInput("KEY")
-      outOut = openOutput("OUT")
+        inIn = openInput("IN")
+        inKey = openInput("KEY")
+        outOut = openOutput("OUT")
     }
 }

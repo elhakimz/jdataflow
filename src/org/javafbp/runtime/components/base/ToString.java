@@ -18,20 +18,20 @@ public class ToString extends Component {
 
     @Override
     protected void execute() throws Exception {
-       Packet p=inIn.receive();
-       Object o = p.getContent();
-       if(o!=null){
-           outOut.send(create(o.toString()));
-       }else{
-           outOut.send(create("null"));
-       }
-       inIn.close();
-       drop(p);
+        Packet p = inIn.receive();
+        Object o = p.getContent();
+        if (o != null) {
+            outOut.send(create(String.valueOf(o)));
+        } else {
+            outOut.send(create("null"));
+        }
+        inIn.close();
+        drop(p);
     }
 
     @Override
     protected void openPorts() {
-        inIn=openInput("IN");
+        inIn = openInput("IN");
         outOut = openOutput("OUT");
     }
 }

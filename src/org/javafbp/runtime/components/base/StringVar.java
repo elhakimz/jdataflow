@@ -1,4 +1,4 @@
-package org.javafbp.runtime.components.flow;
+package org.javafbp.runtime.components.base;
 
 import com.jpmorrsn.fbp.engine.*;
 
@@ -6,26 +6,19 @@ import com.jpmorrsn.fbp.engine.*;
  * Purpose:
  *
  * @author abilhakim
- *         Date: 10/3/14.
+ *         Date: 11/2/14.
  */
-
-/**
- * Component to split an input stream into multiple output streams,
- * where the first 30 packets go to the first output port, the next 30 go
- * to the second and so on.  Each output stream is closed before data starts
- * being sent to the next.  This component was used for testing deadlock behaviour.
- */
-@ComponentDescription("Drop and copy a stream into multiple output streams")
+@ComponentDescription("Create a Date variable")
 @OutPort(value = "OUT", arrayPort = true, description = "multiple IN packet to OUT")
-@InPort(value = "IN", description = "single IN packet")
-public class SplitStream extends Component {
+@InPort(value = "IN", description = "single IN packet", type = String.class)
+public class StringVar extends Component {
 
     private InputPort inport;
 
     private OutputPort[] outportArray;
 
     @Override
-    protected void execute() {
+    protected void execute() throws Exception {
 
         Packet p = inport.receive();
         Object o = p.getContent();
