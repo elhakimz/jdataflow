@@ -1,6 +1,7 @@
 package org.javafbp.runtime.components.base;
 
 import com.jpmorrsn.fbp.engine.*;
+import org.apache.log4j.Logger;
 
 /**
  * Purpose:
@@ -13,6 +14,7 @@ import com.jpmorrsn.fbp.engine.*;
 @InPort(value = "IN", description = "single IN packet", type = Boolean.class)
 public class BooleanVar extends Component {
 
+    final static Logger logger = Logger.getLogger(BooleanVar.class);
     private InputPort inport;
 
     private OutputPort[] outportArray;
@@ -33,7 +35,6 @@ public class BooleanVar extends Component {
 
     @Override
     protected void openPorts() {
-
         inport = openInput("IN");
         outportArray = openOutputArray("OUT");
 

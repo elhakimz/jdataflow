@@ -1,5 +1,6 @@
 package org.hakim.zen.templater.service;
 
+import org.hakim.fbp.util.Settings;
 import org.hakim.fbp.util.Util;
 
 import javax.ws.rs.GET;
@@ -23,7 +24,7 @@ public class TemplaterService {
     @Produces("application/json")
     public String list() {
         System.out.println("Calling TemplaterService.list()");
-        String json =Util.getJsonFileTree("/Users/abilhakim/Documents/PROJECTS/dataflow/web/WEB-INF/template");
+        String json = Util.getJsonFileTree(Settings.SYS_APP_DIR + "/WEB-INF/template");
         return json;
 
     }
@@ -31,11 +32,11 @@ public class TemplaterService {
     @GET
     @Path("get/{file}")
     @Produces("text/plain")
-    public String get(@PathParam("file")String fileName) {
-        String fname= fileName.replace('|','/');
+    public String get(@PathParam("file") String fileName) {
+        String fname = fileName.replace('|', '/');
         System.out.println("fname = " + fname);
 
-        try(BufferedReader br = new BufferedReader(new FileReader(fname))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fname))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {

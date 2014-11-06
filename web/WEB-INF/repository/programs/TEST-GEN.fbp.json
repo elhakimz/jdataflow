@@ -1,9 +1,84 @@
 {
     "nodes": [
         {
+            "id": 11,
+            "color": "hsl(210, 68%, 70%)",
+            "label": "PARAMETER",
+            "type": "base.StringVar",
+            "javaType": "org.javafbp.runtime.components.base.StringVar",
+            "description": "",
+            "x": -282.41582491582494,
+            "y": 159.75533108866443,
+            "state": {
+                "IN": "{ edit_template:'/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/edit.html.ftl',  browser_template:'/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/browse.html.ftl',  menu_template:'/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/menu.html.ftl',  target_dir:'/Users/abilhakim/github/jdataflow/web/backend' }"
+            },
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 12,
+            "color": "hsl( 60, 68%, 70%)",
+            "label": "BROWSER-TEMPLATE",
+            "type": "json.GetByKey",
+            "javaType": "org.javafbp.runtime.components.json.GetByKey",
+            "description": "",
+            "x": 201.49999999999994,
+            "y": -98,
+            "state": {
+                "KEY": "browser_template"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 15,
+            "color": "hsl( 60, 68%, 70%)",
+            "label": "TARGET-DIR",
+            "type": "json.GetByKey",
+            "javaType": "org.javafbp.runtime.components.json.GetByKey",
+            "description": "",
+            "x": 202.83333333333326,
+            "y": 20,
+            "state": {
+                "KEY": "target_dir"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 14,
+            "color": "hsl( 60, 68%, 70%)",
+            "label": "MENU-TEMPLATE",
+            "type": "json.GetByKey",
+            "javaType": "org.javafbp.runtime.components.json.GetByKey",
+            "description": "",
+            "x": 212.66666666666663,
+            "y": 422.5,
+            "state": {
+                "KEY": "menu_template"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 13,
+            "color": "hsl( 60, 68%, 70%)",
+            "label": "EDIT-TEMPLATE",
+            "type": "json.GetByKey",
+            "javaType": "org.javafbp.runtime.components.json.GetByKey",
+            "description": "",
+            "x": 214.49999999999994,
+            "y": 280,
+            "state": {
+                "KEY": "edit_template"
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
             "id": 1,
             "color": "hsl(120, 68%, 70%)",
-            "label": "SqlSysConnection1",
+            "label": "SQL-CONNECTION",
             "type": "db.SqlSysConnection",
             "javaType": "org.javafbp.runtime.components.db.SqlSysConnection",
             "description": "",
@@ -29,17 +104,15 @@
             "h": 225
         },
         {
-            "id": 10,
-            "color": "hsl(219, 16%, 76%)",
-            "label": "EDIT_TEMPLATE",
-            "type": "core.Passthru",
-            "javaType": "com.jpmorrsn.fbp.components.Passthru",
+            "id": 16,
+            "color": "",
+            "label": "SPLIT-TARGET-DATA",
+            "type": "flow.SplitStream",
+            "javaType": "org.javafbp.runtime.components.flow.SplitStream",
             "description": "",
-            "x": 778.0000000000001,
-            "y": 375.5,
-            "state": {
-                "IN": "/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/edit.html.ftl"
-            },
+            "x": 730.8333333333333,
+            "y": 24.5,
+            "state": {},
             "w": 200,
             "h": 75
         },
@@ -50,8 +123,8 @@
             "type": "flow.SplitStream",
             "javaType": "org.javafbp.runtime.components.flow.SplitStream",
             "description": "",
-            "x": 729,
-            "y": 182,
+            "x": 741,
+            "y": 165,
             "state": {},
             "w": 200,
             "h": 75
@@ -59,32 +132,14 @@
         {
             "id": 6,
             "color": "hsl(270, 68%, 70%)",
-            "label": "MENU-PAGE",
-            "type": "zen.CreateBackMenuPage",
-            "javaType": "org.javafbp.runtime.components.zen.CreateBackMenuPage",
-            "description": "",
-            "x": 1043,
-            "y": 342,
-            "state": {
-                "TMPLFILE": "/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/menu.html.ftl",
-                "TARGETDIR": "/Users/abilhakim/github/jdataflow/web/backend"
-            },
-            "w": 200,
-            "h": 225
-        },
-        {
-            "id": 3,
-            "color": "hsl(270, 68%, 70%)",
-            "label": "BROWSER-PAGES",
+            "label": "CreateBackBrowsePage6",
             "type": "zen.CreateBackBrowsePage",
             "javaType": "org.javafbp.runtime.components.zen.CreateBackBrowsePage",
             "description": "",
-            "x": 1050,
-            "y": -3,
+            "x": 1257,
+            "y": -238,
             "state": {
-                "TMPLFILE": "/Users/abilhakim/github/jdataflow/web/WEB-INF/template/backend/browse.html.ftl",
-                "WITHDATA": true,
-                "TARGETDIR": "/Users/abilhakim/github/jdataflow/web/backend"
+                "WITHDATA": true
             },
             "w": 200,
             "h": 300
@@ -92,40 +147,38 @@
         {
             "id": 8,
             "color": "hsl(270, 68%, 70%)",
-            "label": "EDIT-PAGES",
+            "label": "CreateBackEditPage8",
             "type": "zen.CreateBackEditPage",
             "javaType": "org.javafbp.runtime.components.zen.CreateBackEditPage",
             "description": "",
-            "x": 1054,
-            "y": 163,
-            "state": {
-                "TARGETDIR": "/Users/abilhakim/github/jdataflow/web/backend"
-            },
+            "x": 1269,
+            "y": 127,
+            "state": {},
+            "w": 200,
+            "h": 225
+        },
+        {
+            "id": 3,
+            "color": "hsl(270, 68%, 70%)",
+            "label": "CreateBackMenuPage3",
+            "type": "zen.CreateBackMenuPage",
+            "javaType": "org.javafbp.runtime.components.zen.CreateBackMenuPage",
+            "description": "",
+            "x": 1272.8333333333333,
+            "y": 437,
+            "state": {},
             "w": 200,
             "h": 225
         },
         {
             "id": 4,
-            "color": "hsl(219, 16%, 76%)",
-            "label": "WriteToConsole4",
-            "type": "core.WriteToConsole",
-            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+            "color": "",
+            "label": "Merge",
+            "type": "flow.MergeStream",
+            "javaType": "org.javafbp.runtime.components.flow.MergeStream",
             "description": "",
-            "x": 1338,
-            "y": -1,
-            "state": {},
-            "w": 200,
-            "h": 75
-        },
-        {
-            "id": 9,
-            "color": "hsl(219, 16%, 76%)",
-            "label": "WriteToConsole9",
-            "type": "core.WriteToConsole",
-            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
-            "description": "",
-            "x": 1339,
-            "y": 166,
+            "x": 1633.3333333333333,
+            "y": 85.33333333333337,
             "state": {},
             "w": 200,
             "h": 75
@@ -137,8 +190,8 @@
             "type": "core.WriteToConsole",
             "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
             "description": "",
-            "x": 1355,
-            "y": 346,
+            "x": 1925.2340067340067,
+            "y": 87.32267115600453,
             "state": {},
             "w": 200,
             "h": 75
@@ -158,17 +211,6 @@
         },
         {
             "source": {
-                "node": 3,
-                "port": "OUT"
-            },
-            "target": {
-                "node": 4,
-                "port": "IN"
-            },
-            "route": 4
-        },
-        {
-            "source": {
                 "node": 2,
                 "port": "OUT"
             },
@@ -180,6 +222,138 @@
         },
         {
             "source": {
+                "node": 11,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 1,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 11,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 12,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 11,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 13,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 11,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 14,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 11,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 15,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 15,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 16,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 13,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 8,
+                "port": "TEMPLFILE"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 14,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 3,
+                "port": "TMPLFILE"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 16,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 6,
+                "port": "TARGETDIR"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 16,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 8,
+                "port": "TARGETDIR"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 16,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 3,
+                "port": "TARGETDIR"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 5,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 8,
+                "port": "TABLE"
+            },
+            "route": 4
+        },
+        {
+            "source": {
                 "node": 5,
                 "port": "OUT"
             },
@@ -206,6 +380,39 @@
                 "port": "OUT"
             },
             "target": {
+                "node": 4,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 8,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 4,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 3,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 4,
+                "port": "IN"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 4,
+                "port": "OUT"
+            },
+            "target": {
                 "node": 7,
                 "port": "IN"
             },
@@ -213,34 +420,12 @@
         },
         {
             "source": {
-                "node": 5,
+                "node": 12,
                 "port": "OUT"
             },
             "target": {
-                "node": 8,
-                "port": "TABLE"
-            },
-            "route": 4
-        },
-        {
-            "source": {
-                "node": 8,
-                "port": "OUT"
-            },
-            "target": {
-                "node": 9,
-                "port": "IN"
-            },
-            "route": 4
-        },
-        {
-            "source": {
-                "node": 10,
-                "port": "OUT"
-            },
-            "target": {
-                "node": 8,
-                "port": "TEMPLFILE"
+                "node": 6,
+                "port": "TMPLFILE"
             },
             "route": 4
         }

@@ -1,6 +1,7 @@
 package org.hakim.fbp.servlet
 
 import com.jpmorrsn.fbp.engine.*
+import org.apache.log4j.Logger
 import org.hakim.fbp.common.model.FbpEdgeModel
 import org.hakim.fbp.common.model.FbpGraphModel
 import org.hakim.fbp.common.model.FbpNodeModel
@@ -18,6 +19,7 @@ import org.json.JSONObject
  */
 class FbpScriptGenerator {
 
+    final static Logger logger = Logger.getLogger(FbpScriptGenerator.class);
     FbpGraphModel graphModel
     JSONArray params
     FbpProgramModel programModel = new FbpProgramModel()
@@ -197,11 +199,19 @@ class FbpScriptGenerator {
 
 
     List<String> genIips() {
+        List<String> inits2 = new ArrayList<>();
+        List<String> inits
+
+
         if (params != null) {
-            return initializeValuesFromParam(params);
+            inits = initializeEmptyValues(graphModel, params);
+            inits2 = initializeValuesFromParam(params);
         } else {
-            return initializeEmptyValues(graphModel);
+            inits = initializeEmptyValues(graphModel, null);
         }
+        inits.addAll(inits2);
+
+        return inits;
     }
 
     String getArrOutPortName(String srcLabel, FbpEdgeModel.FbpNodePort source) {
@@ -228,14 +238,12 @@ class FbpScriptGenerator {
             JSONObject obj = jsonArray.getJSONObject(i);
             FbpNodeModel node = getNodeModelByName(obj.getString("component"));
             Class cls = Class.forName(node.classType);
-
             if (cls == null) {
                 cls = Object.class;
             }
 
             DateTime dt;
             Object value = obj.get("value");
-
             String comp = obj.getString("component");
             String prt = obj.getString("port");
 
@@ -243,16 +251,17 @@ class FbpScriptGenerator {
 
             if (hasDateTimeInPort(cls, obj.getString("port"))) {
                 dt = formatter.parseDateTime((String) value);
-                iip = String.format("initialize(\"%s\",component(\"%s\"),port(\"%s\"));", String.valueOf(dt), comp, prt);
+                iip = 'initialize(\'' + String.valueOf(dt) + '\',component(\'' + comp + '\'),port(\'' + prt + '\'));'
             } else {
                 //initialize(value,component(comp),port(prt));
                 String sValue;
                 if (value instanceof String) {
-                    sValue = "\"" + value + "\"";
+                    sValue = "$value";
+                    sValue = sValue.replace("\"", "\\\"");
                 } else {
                     sValue = String.valueOf(value);
                 }
-                iip = String.format("initialize(%s,component(\"%s\"),port(\"%s\"));", sValue, comp, prt);
+                iip = 'initialize(\'' + sValue + '\',component(\'' + comp + '\'),port(\'' + prt + '\'));'
             }
             iips.add(iip);
 
@@ -264,7 +273,27 @@ class FbpScriptGenerator {
         return iips
     }
 
-    def initializeEmptyValues(FbpGraphModel graphModel) {
+    /**
+     * find an IIP if it is valued, then
+     * @param graphModel1
+     * @param iip
+     * @return
+     */
+    boolean findIip(JSONArray jsonArray, String component, String port) {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            Object value = obj.get("value");
+            String comp = obj.getString("component");
+            String prt = obj.getString("port");
+
+            if ((component.equals(comp)) && (port.equals(prt))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    def initializeEmptyValues(FbpGraphModel graphModel, JSONArray jsonArray) {
         def iips = []
         DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
         for (FbpNodeModel node : graphModel.nodes) {
@@ -274,18 +303,29 @@ class FbpScriptGenerator {
                 String lbl = node.label;
                 DateTime dt;
                 try {
-                    Class cls = Class.forName(node.classType);
-                    String s;
-                    if (hasDateTimeInPort(cls, (String) k)) {
-                        dt = formatter.parseDateTime((String) v);
-                        s = String.format("initialize(\"%s\",component(\"%s\"),port(\"%s\"));", dt, lbl, String.valueOf(k));
-                    } else if (hasIntegerInPort(cls, (String) k)) {
-                        Integer i = Integer.parseInt((String) v);
-                        s = String.format("initialize(%d,component(\"%s\"),port(\"%s\"));", i, lbl, String.valueOf(k));
-                    } else {
-                        s = String.format("initialize(\"%s\",component(\"%s\"),port(\"%s\"));", String.valueOf(v), lbl, String.valueOf(k));
+
+                    boolean hasIip = false;
+                    if (jsonArray != null) {
+                        hasIip = findIip(jsonArray, lbl, (String) k);
+                    };
+
+                    if (!hasIip) {
+                        Class cls = Class.forName(node.classType);
+                        String s;
+                        if (hasDateTimeInPort(cls, (String) k)) {
+                            dt = formatter.parseDateTime((String) v);
+                            s = String.format('initialize(\'%s\',component(\'%s\'),port(\'%s\'));', dt, lbl, String.valueOf(k));
+                        } else if (hasIntegerInPort(cls, (String) k)) {
+                            Integer i = Integer.parseInt((String) v);
+                            s = String.format('initialize(%d,component(\'%s\'),port(\'%s\'));', i, lbl, String.valueOf(k));
+                        } else {
+                            String sv = String.valueOf(v)
+                            if (sv.indexOf('"') > -1) sv = sv.replaceAll('"', '\"');
+                            s = String.format('initialize(\'%s\',component(\'%s\'),port(\'%s\'));', sv, lbl, String.valueOf(k));
+                        }
+
+                        iips.add(s);
                     }
-                    iips.add(s);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }

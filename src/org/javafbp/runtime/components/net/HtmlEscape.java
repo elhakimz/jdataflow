@@ -1,4 +1,4 @@
-package org.javafbp.runtime.components.base;
+package org.javafbp.runtime.components.net;
 
 /**
  * Purpose:

@@ -6,6 +6,7 @@ import groovy.lang.Binding;
 import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
+import org.apache.log4j.Logger;
 import org.hakim.fbp.common.model.FbpGraphModel;
 import org.hakim.fbp.common.model.FbpProgramModel;
 import org.hakim.fbp.util.Settings;
@@ -29,6 +30,7 @@ import java.util.Map;
  */
 public class FbpRuntime {
 
+    final static Logger logger = Logger.getLogger(FbpRuntime.class);
     private FbpGraphModel graphModel;
     private JSONArray params;
     private FbpProgramModel networkModel = new FbpProgramModel();
@@ -60,6 +62,7 @@ public class FbpRuntime {
         DateTime dt = new DateTime();
         fbpScriptName = "FbpRunner" + dt.toString(formatter) + ".groovy";
         try {
+            logger.info("Processing FBP runner");
             temp = Settings.getInstance().getFreeMarkerConfig().getTemplate("fbp/runner.java.ftl");
             Map<String, Object> root = new HashMap<>();
             root.put("user", "abiel");
@@ -68,7 +71,10 @@ public class FbpRuntime {
             out = new OutputStreamWriter(fos);
             temp.process(root, out);
             out.close();
+            logger.info("End runtime");
+
         } catch (IOException | TemplateException e) {
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
     }

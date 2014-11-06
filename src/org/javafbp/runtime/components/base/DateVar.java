@@ -1,8 +1,7 @@
 package org.javafbp.runtime.components.base;
 
 import com.jpmorrsn.fbp.engine.*;
-
-import java.util.Date;
+import org.joda.time.DateTime;
 
 /**
  * Purpose:
@@ -12,7 +11,7 @@ import java.util.Date;
  */
 @ComponentDescription("Create a Date variable")
 @OutPort(value = "OUT", arrayPort = true, description = "multiple IN packet to OUT")
-@InPort(value = "IN", description = "single IN packet", type = Date.class)
+@InPort(value = "IN", description = "single IN packet", type = DateTime.class)
 public class DateVar extends Component {
 
     private InputPort inport;

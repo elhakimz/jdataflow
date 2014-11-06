@@ -3,7 +3,9 @@ package org.javafbp.runtime.components.zen;
 import com.jpmorrsn.fbp.engine.*;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.apache.log4j.Logger;
 import org.hakim.fbp.util.Settings;
+import org.javafbp.runtime.pattern.IResponsiveComponent;
 import org.javafbp.runtime.pattern.InPortWidget;
 import org.javafbp.runtime.pattern.InPortWidgets;
 import org.json.JSONArray;
@@ -32,7 +34,8 @@ import java.util.Map;
 @InPortWidgets({@InPortWidget(value = "TMPLFILE", widget = InPortWidget.SELECT_DIRECTORY)
         , @InPortWidget(value = "TARGETDIR", widget = InPortWidget.SELECT_DIRECTORY)})
 
-public class CreateBackMenuPage extends Component {
+public class CreateBackMenuPage extends Component implements IResponsiveComponent {
+    final static Logger logger = Logger.getLogger(CreateBackMenuPage.class);
     boolean withData;
     private InputPort tableIn;
     private InputPort templIn;
@@ -91,6 +94,7 @@ public class CreateBackMenuPage extends Component {
             e.printStackTrace();
             result.put("status", "-1");
             result.put("message", e.getMessage());
+
         }
 
         outData.send(create(result.toString(1)));
@@ -113,4 +117,8 @@ public class CreateBackMenuPage extends Component {
     }
 
 
+    @Override
+    public void sendMessage(String message) {
+
+    }
 }

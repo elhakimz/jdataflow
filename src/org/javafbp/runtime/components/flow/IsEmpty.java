@@ -2,6 +2,8 @@ package org.javafbp.runtime.components.flow;
 
 import com.jpmorrsn.fbp.engine.*;
 
+import java.util.Collection;
+
 /**
  * Purpose:
  *
@@ -20,13 +22,13 @@ public class IsEmpty extends Component {
         Packet p = inIn.receive();
         Object o = p.getContent();
 
-        if(o instanceof String && !((String) o).isEmpty()
-           || o != null ){
+        if (o instanceof String && !((String) o).isEmpty()) {
+            outOut.send(create(Boolean.FALSE));
+        } else if ((o instanceof Collection) && ((Collection) o).isEmpty()) {
+            outOut.send(create(Boolean.FALSE));
+        } else {
             outOut.send(create(Boolean.TRUE));
-        }else{
-           outOut.send(create(Boolean.FALSE));
         }
-
         inIn.close();
         outOut.close();
         drop(p);
@@ -34,7 +36,7 @@ public class IsEmpty extends Component {
 
     @Override
     protected void openPorts() {
-       inIn = openInput("IN");
-       outOut = openOutput("OUT");
+        inIn = openInput("IN");
+        outOut = openOutput("OUT");
     }
 }

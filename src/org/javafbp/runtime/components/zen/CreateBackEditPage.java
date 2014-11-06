@@ -3,10 +3,12 @@ package org.javafbp.runtime.components.zen;
 import com.jpmorrsn.fbp.engine.*;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.apache.log4j.Logger;
 import org.hakim.fbp.db.DbUtil;
 import org.hakim.fbp.db.SysDataSource;
 import org.hakim.fbp.util.Inflector;
 import org.hakim.fbp.util.Settings;
+import org.javafbp.runtime.pattern.IResponsiveComponent;
 import org.javafbp.runtime.pattern.InPortWidget;
 import org.javafbp.runtime.pattern.InPortWidgets;
 import org.json.JSONArray;
@@ -34,8 +36,9 @@ import java.util.*;
 @OutPort("OUT")
 @InPortWidgets({@InPortWidget(value = "TEMPLFILE", widget = InPortWidget.SELECT_REPOSITORY)
         , @InPortWidget(value = "TARGETDIR", widget = InPortWidget.SELECT_DIRECTORY)})
-public class CreateBackEditPage extends Component {
+public class CreateBackEditPage extends Component implements IResponsiveComponent {
 
+    final static Logger logger = Logger.getLogger(CreateBackEditPage.class);
     private InputPort tableIn;
     private InputPort templIn;
     private InputPort targetDirIn;
@@ -160,5 +163,10 @@ public class CreateBackEditPage extends Component {
         }
 
         return map;
+    }
+
+    @Override
+    public void sendMessage(String message) {
+
     }
 }

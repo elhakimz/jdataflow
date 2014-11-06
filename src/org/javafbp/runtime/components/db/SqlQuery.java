@@ -44,7 +44,7 @@ public class SqlQuery extends Component {
         }
 
 
-        String qry = (String) p2.getContent();
+        String qry = String.valueOf(p2.getContent());
         Connection connection = (Connection) p.getContent();
         JSONArray datas = new JSONArray();
         JSONArray metas = new JSONArray();

@@ -1,9 +1,11 @@
 package org.javafbp.runtime.components.base;
 
-import com.jpmorrsn.fbp.engine.*;
+import com.jpmorrsn.fbp.engine.Component;
+import com.jpmorrsn.fbp.engine.ComponentDescription;
+import com.jpmorrsn.fbp.engine.OutPort;
+import com.jpmorrsn.fbp.engine.OutputPort;
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
-
-import java.util.Date;
 
 /**
  * Purpose:
@@ -14,8 +16,8 @@ import java.util.Date;
 @ComponentDescription("Get current date from system")
 @OutPort(value = "OUT", type = DateTime.class)
 public class CurrentDate extends Component {
+    final static Logger logger = Logger.getLogger(CurrentDate.class);
     OutputPort outPort;
-
 
     @Override
     protected void execute() throws Exception {
@@ -25,6 +27,6 @@ public class CurrentDate extends Component {
 
     @Override
     protected void openPorts() {
-      outPort= openOutput("OUT");
+        outPort = openOutput("OUT");
     }
 }

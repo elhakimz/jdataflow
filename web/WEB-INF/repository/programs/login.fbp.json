@@ -1,0 +1,119 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "color": "hsl(210, 68%, 70%)",
+            "label": "APP-PARAMETER",
+            "type": "base.StringVar",
+            "javaType": "org.javafbp.runtime.components.base.StringVar",
+            "description": "",
+            "x": 632,
+            "y": 299,
+            "state": {
+                "IN": "{    \"user_name\":\"\",    \"password\":\"\"}"
+            },
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 2,
+            "color": "hsl(210, 68%, 70%)",
+            "label": "STR-QRY",
+            "type": "base.Eval",
+            "javaType": "org.javafbp.runtime.components.base.Eval",
+            "description": "",
+            "x": 943,
+            "y": 278,
+            "state": {
+                "EXPR": "\"SELECT * FROM MST_USER WHERE USER_NAME=\\'\"+PARAMS[\\'user_name\\']+\"\\' AND PASSWD=\\'\"+PARAMS[\\'password\\']+\"\\'\""
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 4,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "SqlSysConnection4",
+            "type": "db.SqlSysConnection",
+            "javaType": "org.javafbp.runtime.components.db.SqlSysConnection",
+            "description": "",
+            "x": 952,
+            "y": 125,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 5,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "SqlQuery5",
+            "type": "db.SqlQuery",
+            "javaType": "org.javafbp.runtime.components.db.SqlQuery",
+            "description": "",
+            "x": 1325,
+            "y": 180,
+            "state": {},
+            "w": 200,
+            "h": 225
+        },
+        {
+            "id": 3,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "OUTPUT",
+            "type": "core.WriteOutputFile",
+            "javaType": "com.jpmorrsn.fbp.components.WriteOutputFile",
+            "description": "",
+            "x": 1611,
+            "y": 178,
+            "state": {},
+            "w": 200,
+            "h": 75
+        }
+    ],
+    "edges": [
+        {
+            "source": {
+                "node": 4,
+                "port": "CONNS"
+            },
+            "target": {
+                "node": 5,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 5,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 3,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 1,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 2,
+                "port": "PARAMS"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 2,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 5,
+                "port": "QUERY"
+            },
+            "route": 0
+        }
+    ]
+}

@@ -1,0 +1,119 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "color": "hsl(210, 68%, 70%)",
+            "label": "APP-PARAMETER",
+            "type": "base.StringVar",
+            "javaType": "org.javafbp.runtime.components.base.StringVar",
+            "description": "",
+            "x": 192,
+            "y": 412,
+            "state": {
+                "IN": "{    \"user_name\":\"\", \"password\":\"\",\"first_name\":\"\",\"last_name\":\"\"    }"
+            },
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 5,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "OUTPUT",
+            "type": "core.WriteOutputFile",
+            "javaType": "com.jpmorrsn.fbp.components.WriteOutputFile",
+            "description": "",
+            "x": 1110.5,
+            "y": 227,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 4,
+            "color": "hsl(210, 68%, 70%)",
+            "label": "EVAL",
+            "type": "base.Eval",
+            "javaType": "org.javafbp.runtime.components.base.Eval",
+            "description": "",
+            "x": 464,
+            "y": 393,
+            "state": {
+                "EXPR": "\"INSERT INTO mst_user(user_name,passwd,first_name,last_name) values(\\'\"+PARAMS.user_name+\"\\',\\'\"+PARAMS.password+\"\\',\\'\"+PARAMS.first_name+\"\\',\\'\"+PARAMS.last_name+\"\\')\""
+            },
+            "w": 200,
+            "h": 150
+        },
+        {
+            "id": 2,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "SqlSysConnection2",
+            "type": "db.SqlSysConnection",
+            "javaType": "org.javafbp.runtime.components.db.SqlSysConnection",
+            "description": "",
+            "x": 531,
+            "y": 110,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 3,
+            "color": "hsl(120, 68%, 70%)",
+            "label": "INSERT-DATA",
+            "type": "db.SqlQuery",
+            "javaType": "org.javafbp.runtime.components.db.SqlQuery",
+            "description": "",
+            "x": 795,
+            "y": 231,
+            "state": {},
+            "w": 200,
+            "h": 225
+        }
+    ],
+    "edges": [
+        {
+            "source": {
+                "node": 4,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 3,
+                "port": "QUERY"
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 2,
+                "port": "CONNS"
+            },
+            "target": {
+                "node": 3,
+                "port": "CONN"
+            },
+            "route": 5
+        },
+        {
+            "source": {
+                "node": 1,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 4,
+                "port": "PARAMS"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 3,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 5,
+                "port": "IN"
+            },
+            "route": 4
+        }
+    ]
+}

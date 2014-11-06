@@ -1,0 +1,273 @@
+{
+    "nodes": [
+        {
+            "id": 6,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "WriteToConsole6",
+            "type": "core.WriteToConsole",
+            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+            "description": "",
+            "x": 1078,
+            "y": 371,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 1,
+            "color": "hsl(210, 68%, 70%)",
+            "label": "CurrentDate1",
+            "type": "base.CurrentDate",
+            "javaType": "org.javafbp.runtime.components.base.CurrentDate",
+            "description": "",
+            "x": 250,
+            "y": 231,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 4,
+            "color": "",
+            "label": "SplitStream4",
+            "type": "flow.SplitStream",
+            "javaType": "org.javafbp.runtime.components.flow.SplitStream",
+            "description": "",
+            "x": 485,
+            "y": 232,
+            "state": {},
+            "w": 200,
+            "h": 75
+        },
+        {
+            "id": 2,
+            "color": "",
+            "label": "ProcessDate1",
+            "type": "dataflow-subgraph",
+            "javaType": "com.jpmorrsn.fbp.engine.SubNet",
+            "description": "",
+            "x": 715,
+            "y": 94,
+            "state": {},
+            "w": 254,
+            "h": 118,
+            "graph": {
+                "nodes": [
+                    {
+                        "id": 2,
+                        "color": "hsl(210, 68%, 70%)",
+                        "label": "FormatDate2",
+                        "type": "base.FormatDate",
+                        "javaType": "org.javafbp.runtime.components.base.FormatDate",
+                        "description": "",
+                        "x": 569,
+                        "y": 196,
+                        "state": {
+                            "FMT": "dd-MMM-yyyy hh:mm:ss"
+                        },
+                        "w": 200,
+                        "h": 150
+                    },
+                    {
+                        "id": 1,
+                        "color": "",
+                        "label": "IN",
+                        "type": "dataflow-input",
+                        "javaType": "com.jpmorrsn.fbp.engine.SubIn",
+                        "description": "",
+                        "x": 180,
+                        "y": 15,
+                        "state": {},
+                        "input-type": "all"
+                    },
+                    {
+                        "id": 99,
+                        "color": "",
+                        "label": "OUT",
+                        "type": "dataflow-output",
+                        "javaType": "com.jpmorrsn.fbp.engine.SubOut",
+                        "description": "",
+                        "x": 975,
+                        "y": 500,
+                        "state": {},
+                        "output-type": "all"
+                    }
+                ],
+                "edges": [
+                    {
+                        "source": {
+                            "node": 1,
+                            "port": "OUT"
+                        },
+                        "target": {
+                            "node": 2,
+                            "port": "IN"
+                        },
+                        "route": 3
+                    },
+                    {
+                        "source": {
+                            "node": 2,
+                            "port": "OUT"
+                        },
+                        "target": {
+                            "node": 99,
+                            "port": "IN"
+                        },
+                        "route": 4
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "color": "",
+            "label": "ProcessDate2",
+            "type": "dataflow-subgraph",
+            "javaType": "com.jpmorrsn.fbp.engine.SubNet",
+            "description": "",
+            "x": 728,
+            "y": 374,
+            "state": {},
+            "w": 237,
+            "h": 101,
+            "graph": {
+                "nodes": [
+                    {
+                        "id": 1,
+                        "color": "",
+                        "label": "IN",
+                        "type": "dataflow-input",
+                        "javaType": "com.jpmorrsn.fbp.engine.SubIn",
+                        "description": "",
+                        "x": 180,
+                        "y": 15,
+                        "state": {},
+                        "input-type": "all"
+                    },
+                    {
+                        "id": 2,
+                        "color": "hsl(210, 68%, 70%)",
+                        "label": "FormatDate2",
+                        "type": "base.FormatDate",
+                        "javaType": "org.javafbp.runtime.components.base.FormatDate",
+                        "description": "",
+                        "x": 587,
+                        "y": 290,
+                        "state": {
+                            "FMT": "dd-MM-yy"
+                        },
+                        "w": 200,
+                        "h": 150
+                    },
+                    {
+                        "id": 99,
+                        "color": "",
+                        "label": "OUT",
+                        "type": "dataflow-output",
+                        "javaType": "com.jpmorrsn.fbp.engine.SubOut",
+                        "description": "",
+                        "x": 975,
+                        "y": 500,
+                        "state": {},
+                        "output-type": "all"
+                    }
+                ],
+                "edges": [
+                    {
+                        "source": {
+                            "node": 1,
+                            "port": "OUT"
+                        },
+                        "target": {
+                            "node": 2,
+                            "port": "IN"
+                        },
+                        "route": 3
+                    },
+                    {
+                        "source": {
+                            "node": 2,
+                            "port": "OUT"
+                        },
+                        "target": {
+                            "node": 99,
+                            "port": "IN"
+                        },
+                        "route": 4
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "color": "hsl(219, 16%, 76%)",
+            "label": "WriteToConsole5",
+            "type": "core.WriteToConsole",
+            "javaType": "com.jpmorrsn.fbp.components.WriteToConsole",
+            "description": "",
+            "x": 1070,
+            "y": 98,
+            "state": {},
+            "w": 200,
+            "h": 75
+        }
+    ],
+    "edges": [
+        {
+            "source": {
+                "node": 1,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 4,
+                "port": "IN"
+            },
+            "route": 3
+        },
+        {
+            "source": {
+                "node": 4,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 2,
+                "port": 1
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 4,
+                "port": "OUT"
+            },
+            "target": {
+                "node": 3,
+                "port": 1
+            },
+            "route": 0
+        },
+        {
+            "source": {
+                "node": 2,
+                "port": 99
+            },
+            "target": {
+                "node": 5,
+                "port": "IN"
+            },
+            "route": 4
+        },
+        {
+            "source": {
+                "node": 3,
+                "port": 99
+            },
+            "target": {
+                "node": 6,
+                "port": "IN"
+            },
+            "route": 4
+        }
+    ]
+}

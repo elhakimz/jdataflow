@@ -92,7 +92,7 @@ public class Settings {
     }
 
     public String getOutputFileName() {
-        return CONTEXT_PATH + SYS_RUNTIME_DIR + "/fbp.out";
+        return SYS_APP_DIR + SYS_RUNTIME_DIR + "/fbp.out";
     }
 
 }
