@@ -24,7 +24,7 @@ public class PlannerService {
         System.out.println("Calling list()");
 
         List<String> results = new ArrayList<>();
-        File[] files = new File(Settings.getInstance().getAppLocation()+"/WEB-INF/repository/planner/").listFiles();
+        File[] files = new File(Settings.getInstance().getSysLocation() + "/WEB-INF/repository/planner/").listFiles();
         System.out.println("files = " + files);
 
         assert files != null;
@@ -42,10 +42,10 @@ public class PlannerService {
     @GET
     @Path("get/{file}")
     @Produces("application/json")
-    public String get(@PathParam("file")String fileName) {
-        String fname= Settings.getInstance().getAppLocation()+"/WEB-INF/repository/planner/"+fileName;
+    public String get(@PathParam("file") String fileName) {
+        String fname = Settings.getInstance().getSysLocation() + "/WEB-INF/repository/planner/" + fileName;
 
-        try(BufferedReader br = new BufferedReader(new FileReader(fname))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fname))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             while (line != null) {
@@ -64,14 +64,14 @@ public class PlannerService {
     @POST
     @Path("save/{file}/{content}")
     @Produces("application/json")
-    public String saveAs(@PathParam("file")String fileName, @PathParam("content")String content) {
+    public String saveAs(@PathParam("file") String fileName, @PathParam("content") String content) {
         String fname = fileName;
-        if(!fname.endsWith(".json")){
-          fname=fname+".json";
+        if (!fname.endsWith(".json")) {
+            fname = fname + ".json";
         }
 
-        String toFile= Settings.getInstance().getAppLocation()+"/WEB-INF/repository/planner/"+fname;
-        System.out.println("save as "+toFile);
+        String toFile = Settings.getInstance().getSysLocation() + "/WEB-INF/repository/planner/" + fname;
+        System.out.println("save as " + toFile);
         PrintWriter writer = null;
 
         try {

@@ -1,11 +1,7 @@
 package org.hakim.fbp.common
 
-import com.jpmorrsn.fbp.engine.Component
-import com.jpmorrsn.fbp.engine.ComponentDescription
-import com.jpmorrsn.fbp.engine.InPort
-import com.jpmorrsn.fbp.engine.InPorts
-import com.jpmorrsn.fbp.engine.OutPort
-import com.jpmorrsn.fbp.engine.OutPorts
+import com.jpmorrsn.fbp.engine.*
+import org.hakim.zen.pageflow.components.PageFlowComponent
 import org.reflections.Reflections
 
 /**
@@ -19,24 +15,32 @@ class FbpLibReader {
      * @param packageName
      * @return
      */
-   static Set<Class<?>> getFbpComponentClasses(String packageName){
+    static Set<Class<?>> getFbpComponentClasses(String packageName) {
 
-       Reflections reflections = new Reflections(packageName)
-       Set<Class<?>> annotated =
-               reflections.getTypesAnnotatedWith(ComponentDescription.class);
-       return annotated
-  }
+        Reflections reflections = new Reflections(packageName)
+
+        Set<Class<?>> annotated
+        annotated = reflections.getTypesAnnotatedWith(ComponentDescription.class);
+        if (annotated.empty) {
+            annotated = reflections.getTypesAnnotatedWith(PageFlowComponent.class);
+        }
+
+        return annotated
+    }
 
     /**
      * get description string of an FBP component
-      * @param aClass
+     * @param aClass
      * @return
      */
-   static String getFbpComponentDescription(Class<?> aClass){
-        if(aClass.isAnnotationPresent(ComponentDescription.class)){
-            ComponentDescription desc=aClass.getAnnotation(ComponentDescription.class)
+    static String getFbpComponentDescription(Class<?> aClass) {
+        if (aClass.isAnnotationPresent(ComponentDescription.class)) {
+            ComponentDescription desc = aClass.getAnnotation(ComponentDescription.class)
             return desc.value()
-        }else{
+        } else if (aClass.isAnnotationPresent(PageFlowComponent.class)) {
+            PageFlowComponent desc = aClass.getAnnotation(PageFlowComponent.class)
+            return desc.value()
+        } else {
             return null
         }
     }
@@ -46,14 +50,14 @@ class FbpLibReader {
      * @param aClass
      * @return
      */
-    static List<InPort> getInPortsFrom(Class<?> aClass){
-        List<InPort> lst=[]
-        if(aClass.isAnnotationPresent(InPorts)){
+    static List<InPort> getInPortsFrom(Class<?> aClass) {
+        List<InPort> lst = []
+        if (aClass.isAnnotationPresent(InPorts)) {
             InPorts ports = aClass.getAnnotation(InPorts)
             ports.value().each {
                 lst.add(it)
             }
-        }else if(aClass.isAnnotationPresent(InPort)){
+        } else if (aClass.isAnnotationPresent(InPort)) {
             InPort port = aClass.getAnnotation(InPort)
             lst.add(port)
         }
@@ -65,15 +69,15 @@ class FbpLibReader {
      * @param aClass
      * @return
      */
-    static List<OutPort> getOutPortsFrom(Class<?> aClass){
+    static List<OutPort> getOutPortsFrom(Class<?> aClass) {
 
-        List<OutPort> lst=[]
-        if(aClass.isAnnotationPresent(OutPorts)){
+        List<OutPort> lst = []
+        if (aClass.isAnnotationPresent(OutPorts)) {
             OutPorts ports = aClass.getAnnotation(OutPorts)
             ports.value().each {
                 lst.add(it)
             }
-        }else if(aClass.isAnnotationPresent(OutPort)){
+        } else if (aClass.isAnnotationPresent(OutPort)) {
             OutPort port = aClass.getAnnotation(OutPort)
             lst.add(port)
         }

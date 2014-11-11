@@ -1,8 +1,10 @@
 package org.hakim.zen.fbp.services
 
+import org.apache.log4j.Logger
 import org.hakim.fbp.util.Settings
 import org.hakim.fbp.util.Util
 import org.json.JSONArray
+import org.json.JSONObject
 
 import javax.ws.rs.*
 
@@ -13,6 +15,10 @@ import javax.ws.rs.*
  */
 @Path("/fbp")
 class FbpService {
+
+    final static Logger logger = Logger.getLogger(FbpService.class);
+
+
     @GET
     @Path("list")
     @Produces("application/json")
@@ -55,7 +61,6 @@ class FbpService {
     @Produces("application/json")
     String genFbpJava(@PathParam("file") String fileName) {
 
-
         return ""
     }
 
@@ -64,30 +69,33 @@ class FbpService {
     @Path("save/{file}/{content}")
     @Produces("application/json")
     String saveFbp(@PathParam("file") String fileName, @PathParam("content") String content) {
-
         String fname = "";
-        if (fileName.contains("/")) {
+        if (fileName.contains("|")) {
             fname = fileName.replace('|', '/');
-        }
+        } else (fname = fileName)
 
-        if (!fname.endsWith(".json")) fname + ".json"
+        if (!fname.endsWith(".fbp.json")) fname = fname + ".fbp.json"
 
         if (!fname.startsWith(Settings.SYS_APP_DIR)) {
-            fname = Settings.SYS_APP_DIR + Settings.SYS_REPOSITORY_DIR + "/programs/" + fileName
+            fname = Settings.SYS_APP_DIR + Settings.SYS_REPOSITORY_DIR + "/programs/" + fname
         }
 
-        System.out.println("fname = " + fname);
+        logger.info("saving " + fname);
+        JSONObject json = new JSONObject()
 
         try {
             PrintWriter writer = new PrintWriter(fname, "UTF-8");
             writer.println(content);
             writer.close();
         } catch (e) {
-            return "{'status':'0','message':'error: $e.message'}"
+            logger.error(e.message)
+            json.put("status", -1);
+            json.put("message", "error ${e.message}")
+            return json.toString();
         }
-
-        return "{'status':'1'}"
-
+        json.put('status', 1)
+        json.put('message', 'Success')
+        return json.toString()
     }
 
 

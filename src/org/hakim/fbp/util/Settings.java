@@ -32,11 +32,11 @@ public class Settings {
     public static final String COMP_GROUPS = "fbp.compgroups";
     public static final String SCRIPT_REPOSITORY = "fbp.repo";
     public static final String FTL_REPOSITORY = "ftl.repo";
-    public static final String SYS_APP_DIR = (String) getInstance().getProperty("app.location");
-    public static final String SYS_RUNTIME_DIR = (String) getInstance().getProperty("app.location.runtime");
-    public static final String SYS_SCRIPT_DIR = (String) getInstance().getProperty("app.location.scripts");
-    public static final String SYS_TEMPLATE_DIR = (String) getInstance().getProperty("app.location.template");
-    public static final String SYS_REPOSITORY_DIR = (String) getInstance().getProperty("app.location.repository");
+    public static final String SYS_APP_DIR = (String) getInstance().getProperty("sys.location");
+    public static final String SYS_RUNTIME_DIR = (String) getInstance().getProperty("sys.location.runtime");
+    public static final String SYS_SCRIPT_DIR = (String) getInstance().getProperty("sys.location.scripts");
+    public static final String SYS_TEMPLATE_DIR = (String) getInstance().getProperty("sys.location.template");
+    public static final String SYS_REPOSITORY_DIR = (String) getInstance().getProperty("sys.location.repository");
     public static final String SYS_DB_URL = (String) getInstance().getProperty("db.url");
     public static final String SYS_DB_USER = (String) getInstance().getProperty("db.user");
     public static final String SYS_DB_PASSWORD = (String) getInstance().getProperty("db.password");
@@ -46,6 +46,10 @@ public class Settings {
     public static final String USER_RUNTIME_DIR = (String) getInstance().getProperty("user.location.runtime");
     public static final String USER_SCRIPT_DIR = (String) getInstance().getProperty("user.location.scripts");
     public static final String USER_TEMPLATE_DIR = (String) getInstance().getProperty("user.location.template");
+    public static final String APPS_LOCATION = (String) getInstance().getProperty("apps.location");
+    public static final String APPS_CONFIG = (String) getInstance().getProperty("apps.config");
+
+
     public static String CONTEXT_PATH = "";
     private static Settings instance;
     Properties prop = new Properties();
@@ -79,8 +83,8 @@ public class Settings {
         return instance;
     }
 
-    public String getAppLocation() {
-        return (String) getProperty("app.location");
+    public String getSysLocation() {
+        return (String) getProperty("sys.location");
     }
 
     public Object getProperty(String key) {
